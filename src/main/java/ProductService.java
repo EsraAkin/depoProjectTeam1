@@ -1,8 +1,4 @@
-import java.util.HashMap;
-import java.util.InputMismatchException;
-import java.util.Map;
-import java.util.Random;
-import java.util.Scanner;
+import java.util.*;
 
 public class ProductService {
 
@@ -10,128 +6,86 @@ public class ProductService {
     String urunIsmi;
     String uretici;
     String birim;
-
-
     String raf;
-
     Integer idCounter = 1000;
     int miktar = 0;
-    static Map<Integer, Product> mevcutUrunler = new HashMap<>();
-
-    Integer idCounter=1;
-    Map<Integer, Product> mevcutUrunler=new HashMap<>();
-
-    public void urunGirisi(int idCounter){
-        System.out.print("Giriş yapmak istediğiniz ürünün ID'sini girin: ");
-        int id = input.nextInt();
-
-        System.out.print("Giriş miktarını girin: ");
-        int miktar = input.nextInt();
-        input.nextLine(); // Newline consumation
-
-        Product urunIsmi = null;
-        if (Product.containsKey(idCounter)) {
-            urunIsmi .getUrunIsmi()urunIsmi.getIdCounter(int id);
-            urunIsmi.setMiktar(urunIsmi.getMiktar() + miktar);
-            System.out.println("Ürün girişi başarıyla yapıldı!");
-        } else {
-            System.out.println("Ürün bulunamadı.");
-        }
-    }
-
-    // Ürün girişi yapma metodu
-    public static void urunGirisi(int id, int eklenenMiktar) {
-        Product urunIsmi = urunIsmi.get(id); // Ürünü ID'sine göre bul
-        if (urunIsmi != null) {
-            urunIsmi.setMiktar(urunIsmi.getMiktar() + eklenenMiktar); // Miktarı güncelle
-        }
-    }
-
-
-
-
-
-
-    private Random random = new Random();
-
-    private String[] urunIsimleri = {"Un", "Şeker", "Çay", "Pirinç", "Yağ", "Süt", "Ekmek", "Et", "Sebze", "Meyve"};
-    private String[] ureticiler = {"Firma A", "Firma B", "Firma C", "Firma D", "Firma E"};
-    private String[] birimler = {"Unit"};
-
-    public ProductService() {
-        mevcutUrunler = new HashMap<>(); //urunler Map’i tüm ürünleri ID’leriyle saklar
-        for (int i = 0; i < 20; i++) {
-            String randomUrunIsmi = urunIsimleri[random.nextInt(urunIsimleri.length)];
-            String randomUretici = ureticiler[random.nextInt(ureticiler.length)];
-            String randomBirim = birimler[random.nextInt(birimler.length)];
-
-            //urunTanimlama(randomUrunIsmi, randomUretici, randomBirim);
-        }
-
-    }
-
-    // Ürün listeleme
-    public void urunListele() {
-        System.out.println("---------------------------------------------------------------");
-        System.out.printf("%5s %10s %10s %8s %10s %10s\n", "ID", "İsim", "Üretici", "Miktar", "Birim", "Raf");
-        System.out.println("---------------------------------------------------------------");
-
-        Scanner scanner = new Scanner(System.in);
-        int i = 0;
-        for (Map.Entry<Integer, Product> entry : mevcutUrunler.entrySet()) {
-            i++;
-            int key = entry.getKey();
-            Product value = entry.getValue();
-            System.out.println(value);
-            if(i%10==0){
-
-                System.out.println("Press enter to continue...");
-                scanner.nextLine();
-            }
-        }
-    }
-
+    Map<Integer, Product> mevcutUrunler = new HashMap<>();
 
     //ÜRÜN TANIMLAMA   --Ertuğrul H.
 
-    public void urunTanımlama() {
-
-
-        Integer id = idCounter; // ID^yi otomatik arttırır.
-        idCounter++;
+    public void urunTanimlama() {
 
         System.out.println("Lütfen Ürünün İsmini Giriniz");
-        String ürünİsmi = input.nextLine();
-
+        urunIsmi = input.nextLine();
         System.out.println("Lütfen Üretici İsmi Giriniz");
-        String üreticiİsmi = input.nextLine();
+        uretici = input.nextLine();
 
-        System.out.println("Lütfen Ürünün Birimini Giriniz");
-        String ürünBirimi = input.nextLine();
+        boolean urunBulunduMu = false;
 
-        while (true) {
-            System.out.println("Lütfen Ürün Miktarını Giriniz:");
-            try {
-                miktar = input.nextInt();
-                input.nextLine();
+        for (Map.Entry<Integer, Product> entry : mevcutUrunler.entrySet()) {
+            Product product = entry.getValue();
+            //  int id = entry.getKey();
+
+            if (product.getUrunIsmi().equalsIgnoreCase(urunIsmi) && product.getUretici().equalsIgnoreCase(uretici)) {
+                System.out.println("Bu ürün" + idCounter + " ile zaten mevcut.");
+                urunBulunduMu = true;
                 break;
-            } catch (InputMismatchException e) {
-                System.out.println("Yanlış Giriş Yaptınız Sayı Girmelisiniz !");
-                input.nextLine();
             }
         }
+        if (!urunBulunduMu) {
 
-        System.out.println("Lütfen Raf İsmini Giriniz");
-        String rafİsim = input.nextLine();
+            System.out.println("Lütfen Ürün birimini giriniz :");
+            birim = input.nextLine();
 
-        Product yeniUrun = new Product(id, ürünİsmi, üreticiİsmi, miktar, ürünBirimi, rafİsim);
-        mevcutUrunler.put(id, yeniUrun);
+            mevcutUrunler.put(idCounter, new Product(idCounter, urunIsmi, uretici, miktar, birim, raf));
 
-        System.out.println("Ürün başarıyla eklendi: ");
-
+            System.out.println("Ürün başarıyla eklendi: ");
+            idCounter++;
 
         }
-   
+
+
+        idCounter++;
+
+        urunListele1();
+    }
+
+    public void urunGirisi() {
+
+        System.out.println("Miktar güncellemek için Id'yi giriniz :");
+        int id = input.nextInt();
+
+        if (mevcutUrunler.containsKey(id)) {
+            Product product = mevcutUrunler.get(id);
+            System.out.println("Eklemek istediğiniz miktarı giriniz : ");
+            int eklenacekMiktar = input.nextInt();
+
+            //Miktar güncelle
+            product.setMiktar(product.getMiktar() + eklenacekMiktar);
+            System.out.println("Güncel ürün miktarı : " + product.getMiktar());
+
+        } else {
+            System.out.println("Geçersiz ürün id'si.");
+        }
+
+        urunListele1();
+    }
+
+    public void urunListele1() {
+
+        System.out.printf("%10s %10s %10s %10s %10s %10s%n", "ID", "İsim", "Üretici", "Miktar", "Birim", "Raf");
+        System.out.println("----------------------------------------------------------------");
+        Set<Map.Entry<Integer, Product>> mevUrunList = mevcutUrunler.entrySet();
+        for (Map.Entry<Integer, Product> entry : mevUrunList) {
+            Product product = entry.getValue();
+
+
+            Product value = entry.getValue();
+            System.out.printf("%10s %10s %10s %10s %10s %10s%n\n", product.getIdCounter(), value.getUrunIsmi(), value.getUretici(), value.getMiktar(), value.getBirim(), value.getRaf());
+
+        }
+    }
+
     //ÜRÜN LİSTELEME   --Ahsen H.
 
     //ÜRÜN GİRİŞİ      --Hatice Angılcı.
@@ -142,7 +96,10 @@ public class ProductService {
     public void urunuGuncelle() {
         if (!urunKontrol()) return; // Depoda ürün yoksa ana menüye dön
 
-        int id = intGirisAl("İşlem yapmak istediğiniz ürünün id numarasını giriniz: ");
+
+        Utils utils=new Utils();
+
+        int id = utils.intGirisAl("İşlem yapmak istediğiniz ürünün id numarasını giriniz: ");
 
         if (mevcutUrunler.containsKey(id)) {
             Product product = mevcutUrunler.get(id);
@@ -198,8 +155,6 @@ public class ProductService {
     }
 
 
-
-
     //----------------------------List boşsa yardımcı metodu-----------------------------
     private boolean urunKontrol() {
         if (mevcutUrunler.isEmpty()) {
@@ -210,24 +165,4 @@ public class ProductService {
     }
 
 
-    //---------------------------int yerine string exception metodu----------------------
-    private int intGirisAl(String mesaj) {
-        Scanner input = new Scanner(System.in);
-        int sayi;
-
-        while (true) {
-            System.out.print(mesaj);
-            try {
-                sayi = input.nextInt();
-                input.nextLine(); // Buffer temizliği
-                return sayi; // Başarılı giriş yapılmışsa döndür
-            } catch (InputMismatchException e) {
-                System.out.println("Hatalı giriş! Lütfen bir tam sayı giriniz.");
-                input.nextLine(); // Hatalı girdiyi temizle
-            }
-        }
-    }
-
-
-
-    }
+}

@@ -11,7 +11,6 @@ public class DepoProjectApp {
 
     private static void start() {
 
-
         ProductService productService=new ProductService();
 
         Scanner input = new Scanner(System.in);
@@ -44,15 +43,16 @@ public class DepoProjectApp {
 
             switch (secim) {
                 case 1:
-                    productService.urunTanımlama();
+                    productService.urunTanimlama();
 
                 break;
                 case 2:
                     //Ürün Listeleme
+                    productService.urunListele1();
                     break;
                 case 3:
                     //Ürün Girişi
-                    ProductService.urunGirisi();
+                    productService.urunGirisi();
                     break;
                 case 4:
                     //Rafa Koyma
@@ -82,4 +82,12 @@ public class DepoProjectApp {
         } while (secim != 0);
         input.close();
     }
+
+
+
+
+
+
+
+
 }
