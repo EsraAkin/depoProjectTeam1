@@ -18,7 +18,7 @@ public class ProductService {
 
     //ÜRÜN TANIMLAMA   --Ertuğrul H.
     //ÜRÜN LİSTELEME   --Ahsen H.
-    //ÜRÜN GİRİŞİ      --Hatice H.
+    //ÜRÜN GİRİŞİ      --Hatice HHHHHHHHHHH
     //RAFA KOYMA       --Kerim H.
     //ÜRÜN ÇIKIŞI      --Yuşa H.
     //GÜNCELLEME       --ALPER h. eSRA
