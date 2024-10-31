@@ -1,5 +1,5 @@
 public class Product {
-
+//hatice angi
     private Integer idCounter;
     private String urunIsmi;
     private String uretici;
