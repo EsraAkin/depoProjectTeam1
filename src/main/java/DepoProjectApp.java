@@ -1,16 +1,21 @@
 import java.util.InputMismatchException;
 import java.util.Scanner;
-
+//hatice.....
 public class DepoProjectApp {
     public static void main(String[] args) {
         start();
     }
 
     private static void start() {
+<<<<<<< HEAD
 
         ProductService productService=new ProductService();
+=======
+        ProductService productService = new ProductService();
+>>>>>>> main
         Scanner input = new Scanner(System.in);
         int secim;
+
 
         do {
 
@@ -39,8 +44,9 @@ public class DepoProjectApp {
 
             switch (secim) {
                 case 1:
-                    //Ürün tanımlama
-                    break;
+                    productService.urunTanımlama();
+
+                break;
                 case 2:
                     //Ürün Listeleme
                     break;
@@ -55,8 +61,11 @@ public class DepoProjectApp {
                     break;
                 case 6:
                     //Ürün güncelle
+<<<<<<< HEAD
                     productService.urunuGuncelle();
                     break;
+=======
+>>>>>>> main
                 case 0:
                     //ÇIKIŞ
                     break;
