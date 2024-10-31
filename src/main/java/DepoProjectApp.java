@@ -1,7 +1,10 @@
+import java.util.HashMap;
 import java.util.InputMismatchException;
 import java.util.Scanner;
-//hatice.....
+
 public class DepoProjectApp {
+
+
     public static void main(String[] args) {
         start();
     }
@@ -13,7 +16,6 @@ public class DepoProjectApp {
 
         Scanner input = new Scanner(System.in);
         int secim;
-
 
         do {
 
@@ -50,6 +52,7 @@ public class DepoProjectApp {
                     break;
                 case 3:
                     //Ürün Girişi
+                    ProductService.urunGirisi();
                     break;
                 case 4:
                     //Rafa Koyma
@@ -77,6 +80,6 @@ public class DepoProjectApp {
             }
 
         } while (secim != 0);
-
+        input.close();
     }
 }
