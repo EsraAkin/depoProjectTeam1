@@ -1,5 +1,5 @@
 public class Product {
-
+//hatice angi
     private Integer idCounter;
     private String urunIsmi;
     private String uretici;
@@ -13,7 +13,7 @@ public class Product {
         this.uretici = uretici;
         this.miktar = 0;
         this.birim = birim;
-        this.raf = "raf";
+        this.raf = "raf";/////kakakkaakkaka
     }
 
 
@@ -26,7 +26,8 @@ public class Product {
 
     public void setIdCounter(Integer idCounter) {
         this.idCounter = idCounter;
-    }
+    }//kakkakakmememememememememe
+    //kakakakakakka
 
     public String getUrunIsmi() {
         return urunIsmi;
