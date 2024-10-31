@@ -7,9 +7,10 @@ public class DepoProjectApp {
     }
 
     private static void start() {
-
+        ProductService productService = new ProductService();
         Scanner input = new Scanner(System.in);
         int secim;
+
 
         do {
 
@@ -37,8 +38,9 @@ public class DepoProjectApp {
 
             switch (secim) {
                 case 1:
-                    //Ürün tanımlama
-                    break;
+                    productService.urunTanımlama();
+
+                break;
                 case 2:
                     //Ürün Listeleme
                     break;
