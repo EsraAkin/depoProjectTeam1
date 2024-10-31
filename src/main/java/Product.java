@@ -26,7 +26,7 @@ public class Product {
 
     public void setIdCounter(Integer idCounter) {
         this.idCounter = idCounter;
-    }
+    }kakkakakmememememememememe
 
     public String getUrunIsmi() {
         return urunIsmi;
