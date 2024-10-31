@@ -7,12 +7,10 @@ public class DepoProjectApp {
     }
 
     private static void start() {
-<<<<<<< HEAD
+
 
         ProductService productService=new ProductService();
-=======
-        ProductService productService = new ProductService();
->>>>>>> main
+
         Scanner input = new Scanner(System.in);
         int secim;
 
@@ -61,11 +59,10 @@ public class DepoProjectApp {
                     break;
                 case 6:
                     //Ürün güncelle
-<<<<<<< HEAD
+
                     productService.urunuGuncelle();
                     break;
-=======
->>>>>>> main
+
                 case 0:
                     //ÇIKIŞ
                     break;
