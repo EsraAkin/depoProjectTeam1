@@ -22,7 +22,7 @@ public class ProductService {
     //RAFA KOYMA       --Kerim H.
     //ÜRÜN ÇIKIŞI      --Yuşa H.
     //GÜNCELLEME       --ALPER h. Esra AKINEDEN
-    //ARAMA            --Lambda
+    //ARAMA            --Lambda ile ürüne-üreticiye-kalan miktara göre arama yapılacak...
 
 
 }
