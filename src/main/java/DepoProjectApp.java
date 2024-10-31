@@ -11,10 +11,11 @@ public class DepoProjectApp {
 
     private static void start() {
 
+
+        ProductService productService=new ProductService();
+
         Scanner input = new Scanner(System.in);
         int secim;
-
-
 
         do {
 
@@ -26,6 +27,7 @@ public class DepoProjectApp {
             System.out.println("3-Ürün Girişi");
             System.out.println("4-Ürün Rafa Koyma");
             System.out.println("5-Ürün Çıkışi");
+            System.out.println("6-Ürün Güncelle");
             System.out.println("0-ÇIKIŞ");
 
             //Kullanıcı int yerine string girerse exeption kontrolü yapıyotuz.
@@ -42,8 +44,9 @@ public class DepoProjectApp {
 
             switch (secim) {
                 case 1:
-                    //Ürün tanımlama
-                    break;
+                    productService.urunTanımlama();
+
+                break;
                 case 2:
                     //Ürün Listeleme
                     break;
@@ -57,6 +60,12 @@ public class DepoProjectApp {
                 case 5:
                     //Ürün Çıkışı
                     break;
+                case 6:
+                    //Ürün güncelle
+
+                    productService.urunuGuncelle();
+                    break;
+
                 case 0:
                     //ÇIKIŞ
                     break;
