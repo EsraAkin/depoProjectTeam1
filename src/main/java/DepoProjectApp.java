@@ -51,6 +51,8 @@ public class DepoProjectApp {
                 case 5:
                     //Ürün Çıkışı
                     break;
+                case 6:
+                    //Ürün güncelle
                 case 0:
                     //ÇIKIŞ
                     break;
