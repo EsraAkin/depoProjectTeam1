@@ -15,6 +15,23 @@ public class ProductService {
 
     Map<Integer, Product> mevcutUrunler=new HashMap<>();
 
+    public void urunGirisi(int idCounter){
+        System.out.print("Giriş yapmak istediğiniz ürünün ID'sini girin: ");
+        int id = input.nextInt();
+
+        System.out.print("Giriş miktarını girin: ");
+        int miktar = input.nextInt();
+        input.nextLine(); // Newline consumation
+
+        Product urunIsmi = null;
+        if (Product.containsKey(idCounter)) {
+            urunIsmi .getUrunIsmi()urunIsmi.getIdCounter(int id);
+            urunIsmi.setMiktar(urunIsmi.getMiktar() + miktar);
+            System.out.println("Ürün girişi başarıyla yapıldı!");
+        } else {
+            System.out.println("Ürün bulunamadı.");
+        }
+    }
 
     // Ürün girişi yapma metodu
     public static void urunGirisi(int id, int eklenenMiktar) {
