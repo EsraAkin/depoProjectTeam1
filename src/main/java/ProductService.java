@@ -18,11 +18,10 @@ public class ProductService {
 
     //ÜRÜN TANIMLAMA   --Ertuğrul H.
     //ÜRÜN LİSTELEME   --Ahsen H.
-    //ÜRÜN GİRİŞİ      --Hatice HHHHHHHHHHH
+    //ÜRÜN GİRİŞİ      --Hatice Angılcı.
     //RAFA KOYMA       --Kerim H.
     //ÜRÜN ÇIKIŞI      --Yuşa H.
-    //GÜNCELLEME       --ALPER H.- Esra 
-    //ARAMA            --Lambda ile ürüne, üreticiye, kalan miktara göre arama
-
+    //GÜNCELLEME       --ALPER h. Esra AKINEDEN
+    //ARAMA            --Lambda ile ürüne-üreticiye-kalan miktara göre arama yapılacak...
 
 }
