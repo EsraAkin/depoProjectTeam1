@@ -21,7 +21,7 @@ public class ProductService {
     //ÜRÜN GİRİŞİ      --Hatice HHHHHHHHHHH
     //RAFA KOYMA       --Kerim H.
     //ÜRÜN ÇIKIŞI      --Yuşa H.
-    //GÜNCELLEME       --ALPER h. eSRA
+    //GÜNCELLEME       --ALPER h. eSRA eeee
     //ARAMA            --Lambda
 
 
