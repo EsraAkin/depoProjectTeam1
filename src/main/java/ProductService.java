@@ -94,7 +94,7 @@ public class ProductService {
     //GÜNCELLEME       --ALPER h. Esra AKINEDEN
     //ARAMA            --Lambda ile ürüne-üreticiye-kalan miktara göre arama yapılacak...
     public void urunuGuncelle() {
-        if (!urunKontrol()) return; // Depoda ürün yoksa ana menüye dön
+        if (!Utils.Utils1.urunKontrol(mevcutUrunler)) return;
 
 
         Utils utils=new Utils();
@@ -154,15 +154,6 @@ public class ProductService {
         //urunListele(); // Güncellenmiş ürün listesini göster
     }
 
-
-    //----------------------------List boşsa yardımcı metodu-----------------------------
-    private boolean urunKontrol() {
-        if (mevcutUrunler.isEmpty()) {
-            System.out.println("Depoda henüz tanımlanmış bir ürün yok! Lütfen önce bir ürün tanımlayın.");
-            return false; // Depoda ürün yoksa false döner
-        }
-        return true; // Depoda ürün varsa true döner
-    }
 
 
     //----------------------------Urun Arama-----------------------------
