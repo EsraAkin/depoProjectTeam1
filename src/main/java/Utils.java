@@ -22,6 +22,15 @@ public class Utils {
         }
     }
 
+    public class Utils1 {
+        public static boolean urunKontrol(Map<Integer, Product> mevcutUrunler) {
+            if (mevcutUrunler.isEmpty()) {
+                System.out.println("Depoda henüz tanımlanmış bir ürün yok! Lütfen önce bir ürün tanımlayın.");
+                return false; // Depoda ürün yoksa false döner
+            }
+            return true; // Depoda ürün varsa true döner
+        }
+    }
 
         public static boolean urunKontrol(Map<Integer, Product> mevcutUrunler) {
             if (mevcutUrunler.isEmpty()) {
