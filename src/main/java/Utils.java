@@ -4,8 +4,6 @@ import java.util.Scanner;
 
 public class Utils {
 
-    ProductService productService=new ProductService();
-
     //---------------------------int yerine string exception metodu----------------------
     public int intGirisAl(String mesaj) {
         Scanner input = new Scanner(System.in);
@@ -24,7 +22,6 @@ public class Utils {
         }
     }
 
-    //----------------------------List boşsa yardımcı metodu-----------------------------
 
         public static boolean urunKontrol(Map<Integer, Product> mevcutUrunler) {
             if (mevcutUrunler.isEmpty()) {
@@ -32,8 +29,6 @@ public class Utils {
                 return false; // Depoda ürün yoksa false döner
             }
             return true; // Depoda ürün varsa true döner
-
-    }
-
+        }
 
 }

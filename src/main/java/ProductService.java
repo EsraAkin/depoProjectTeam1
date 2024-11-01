@@ -36,10 +36,10 @@ public class ProductService {
 
         for (Map.Entry<Integer, Product> entry : mevcutUrunler.entrySet()) {
             Product product = entry.getValue();
-            //  int id = entry.getKey();
+             int id = entry.getKey();
 
             if (product.getUrunIsmi().equalsIgnoreCase(urunIsmi) && product.getUretici().equalsIgnoreCase(uretici)) {
-                System.out.println("Bu ürün" + idCounter + " ile zaten mevcut.");
+                System.out.println("Bu ürün " + id + " ile zaten mevcut.");
                 urunBulunduMu = true;
                 break;
             }
@@ -66,8 +66,6 @@ public class ProductService {
         Utils utils=new Utils();
         if (!Utils.urunKontrol(mevcutUrunler)) return; // Depoda ürün yoksa ana menüye dön
         int id = utils.intGirisAl("İşlem yapmak istediğiniz ürünün id numarasını giriniz: ");
-
-        System.out.println("Miktar güncellemek için Id'yi giriniz :");
 
         if (mevcutUrunler.containsKey(id)) {
             Product product = mevcutUrunler.get(id);
@@ -116,7 +114,7 @@ public class ProductService {
     public void urunuGuncelle() {
 
         Utils utils=new Utils();
-        Utils utils1=new Utils();
+
         if (!Utils.urunKontrol(mevcutUrunler)) return; // Depoda ürün yoksa ana menüye dön
         int id = utils.intGirisAl("İşlem yapmak istediğiniz ürünün id numarasını giriniz: ");
 
