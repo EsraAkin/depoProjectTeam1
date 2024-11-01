@@ -44,9 +44,6 @@ public class ProductService {
 
         }
 
-
-        idCounter++;
-
         urunListele1();
     }
 
