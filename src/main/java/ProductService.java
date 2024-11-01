@@ -24,10 +24,10 @@ public class ProductService {
 
         for (Map.Entry<Integer, Product> entry : mevcutUrunler.entrySet()) {
             Product product = entry.getValue();
-            int id = entry.getKey();
+            //  int id = entry.getKey();
 
             if (product.getUrunIsmi().equalsIgnoreCase(urunIsmi) && product.getUretici().equalsIgnoreCase(uretici)) {
-                System.out.println("Bu ürün" + id + " ile zaten mevcut.");
+                System.out.println("Bu ürün" + idCounter + " ile zaten mevcut.");
                 urunBulunduMu = true;
                 break;
             }
@@ -37,12 +37,15 @@ public class ProductService {
             System.out.println("Lütfen Ürün birimini giriniz :");
             birim = input.nextLine();
 
-            mevcutUrunler.put(idCounter, new Product(idCounter, urunIsmi, uretici, miktar, birim, null));
+            mevcutUrunler.put(idCounter, new Product(idCounter, urunIsmi, uretici, miktar, birim, raf));
 
             System.out.println("Ürün başarıyla eklendi: ");
             idCounter++;
 
         }
+
+
+        idCounter++;
 
         urunListele1();
     }
@@ -94,7 +97,7 @@ public class ProductService {
         if (!urunKontrol()) return; // Depoda ürün yoksa ana menüye dön
 
 
-        Utils utils = new Utils();
+        Utils utils=new Utils();
 
         int id = utils.intGirisAl("İşlem yapmak istediğiniz ürünün id numarasını giriniz: ");
 
@@ -140,7 +143,7 @@ public class ProductService {
             System.out.print("Yeni Raf (güncellenmeyecekse boş bırakın): ");
             String yeniRaf = input.nextLine();
             if (!yeniRaf.trim().isEmpty()) {
-                product.setRaf(yeniRaf);
+                product.setRaf("raf" + yeniRaf);
             }
 
             System.out.println("Ürün bilgileri başarıyla güncellendi.");
@@ -161,5 +164,5 @@ public class ProductService {
         return true; // Depoda ürün varsa true döner
     }
 
-}
 
+}
