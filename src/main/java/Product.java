@@ -69,4 +69,8 @@ public class Product {
         public void setRaf (String raf){
             this.raf = raf;
         }
+
+    public String toString() {
+        return String.format("%-20s | %-20s | %-20s | %-10s | %-10s | %-10s",
+                idCounter, urunIsmi, uretici, miktar, birim, raf);
     }

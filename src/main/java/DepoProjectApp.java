@@ -65,7 +65,9 @@ public class DepoProjectApp {
 
                     productService.urunuGuncelle();
                     break;
-
+                case 7:
+                    productService.urunArama();
+                    break;
                 case 0:
                     //ÇIKIŞ
                     break;
