@@ -64,8 +64,7 @@ public class ProductService {
     public void urunGirisi() {
 
         Utils utils=new Utils();
-        Utils utils1=new Utils();
-        if (!utils1.urunKontrol()) return; // Depoda ürün yoksa ana menüye dön
+        if (!Utils.urunKontrol(mevcutUrunler)) return; // Depoda ürün yoksa ana menüye dön
         int id = utils.intGirisAl("İşlem yapmak istediğiniz ürünün id numarasını giriniz: ");
 
         System.out.println("Miktar güncellemek için Id'yi giriniz :");
@@ -118,7 +117,7 @@ public class ProductService {
 
         Utils utils=new Utils();
         Utils utils1=new Utils();
-        if (!utils1.urunKontrol()) return; // Depoda ürün yoksa ana menüye dön
+        if (!Utils.urunKontrol(mevcutUrunler)) return; // Depoda ürün yoksa ana menüye dön
         int id = utils.intGirisAl("İşlem yapmak istediğiniz ürünün id numarasını giriniz: ");
 
         if (mevcutUrunler.containsKey(id)) {
@@ -163,7 +162,7 @@ public class ProductService {
             System.out.print("Yeni Raf (güncellenmeyecekse boş bırakın): ");
             String yeniRaf = input.nextLine();
             if (!yeniRaf.trim().isEmpty()) {
-                product.setRaf("raf" + yeniRaf);
+                product.setRaf(yeniRaf);
             }
 
             System.out.println("Ürün bilgileri başarıyla güncellendi.");
@@ -179,7 +178,7 @@ public class ProductService {
 
         Utils utils=new Utils();
         Utils utils1=new Utils();
-        if (!utils1.urunKontrol()) return; // Depoda ürün yoksa ana menüye dön
+        if (!Utils.urunKontrol(mevcutUrunler)) return; // Depoda ürün yoksa ana menüye dön
         int id = utils.intGirisAl("İşlem yapmak istediğiniz ürünün id numarasını giriniz: ");
 
 
@@ -243,7 +242,7 @@ public class ProductService {
 
         Utils utils=new Utils();
         Utils utils1=new Utils();
-        if (!utils1.urunKontrol()) return; // Depoda ürün yoksa ana menüye dön
+        if (!Utils.urunKontrol(mevcutUrunler)) return; // Depoda ürün yoksa ana menüye dön
         int id = utils.intGirisAl("İşlem yapmak istediğiniz ürünün id numarasını giriniz: ");
 
 

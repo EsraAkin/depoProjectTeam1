@@ -1,4 +1,5 @@
 import java.util.InputMismatchException;
+import java.util.Map;
 import java.util.Scanner;
 
 public class Utils {
@@ -24,12 +25,15 @@ public class Utils {
     }
 
     //----------------------------List boşsa yardımcı metodu-----------------------------
-    public boolean urunKontrol() {
-        if (productService.mevcutUrunler.isEmpty()) {
-            System.out.println("Depoda henüz tanımlanmış bir ürün yok! Lütfen önce bir ürün tanımlayın.");
-            return true; // Depoda ürün yoksa false döner
-        }
 
-        return false; // Depoda ürün varsa true döner
+        public static boolean urunKontrol(Map<Integer, Product> mevcutUrunler) {
+            if (mevcutUrunler.isEmpty()) {
+                System.out.println("Depoda henüz tanımlanmış bir ürün yok! Lütfen önce bir ürün tanımlayın.");
+                return false; // Depoda ürün yoksa false döner
+            }
+            return true; // Depoda ürün varsa true döner
+
     }
+
+
 }
