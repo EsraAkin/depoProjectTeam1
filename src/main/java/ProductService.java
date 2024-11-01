@@ -1,6 +1,17 @@
+
+//ÜRÜN TANIMLAMA   --Ertuğrul H.
+//ÜRÜN LİSTELEME   --Ahsen H.
+//ÜRÜN GİRİŞİ      --Hatice H.
+//RAFA KOYMA       --Kerim H.
+//ÜRÜN ÇIKIŞI      --Yuşa H.--
+//GÜNCELLEME       --Esra H.
+//ARAMA            --Alper H. Lambda ile ürüne-üreticiye-kalan miktara göre arama yapılacak...
+
+
 import java.util.*;
 
 public class ProductService {
+
 
     Scanner input = new Scanner(System.in);
     String urunIsmi;
@@ -11,7 +22,7 @@ public class ProductService {
     int miktar = 0;
     Map<Integer, Product> mevcutUrunler = new HashMap<>();
 
-    //ÜRÜN TANIMLAMA   --Ertuğrul H.
+    //----------------------------ÜRÜN TANIMLAMA   --Ertuğrul H.----------------------------//
 
     public void urunTanimlama() {
 
@@ -20,14 +31,15 @@ public class ProductService {
         System.out.println("Lütfen Üretici İsmi Giriniz");
         uretici = input.nextLine();
 
+
         boolean urunBulunduMu = false;
 
         for (Map.Entry<Integer, Product> entry : mevcutUrunler.entrySet()) {
             Product product = entry.getValue();
-            //  int id = entry.getKey();
+             int id = entry.getKey();
 
             if (product.getUrunIsmi().equalsIgnoreCase(urunIsmi) && product.getUretici().equalsIgnoreCase(uretici)) {
-                System.out.println("Bu ürün" + idCounter + " ile zaten mevcut.");
+                System.out.println("Bu ürün " + id + " ile zaten mevcut.");
                 urunBulunduMu = true;
                 break;
             }
@@ -43,17 +55,17 @@ public class ProductService {
             idCounter++;
 
         }
-
-
-        idCounter++;
-
         urunListele1();
     }
 
+
+    //----------------------------ÜRÜN GİRİŞİ   --Hatice H.----------------------------//
+
     public void urunGirisi() {
 
-        System.out.println("Miktar güncellemek için Id'yi giriniz :");
-        int id = input.nextInt();
+        Utils utils=new Utils();
+        if (!Utils.urunKontrol(mevcutUrunler)) return; // Depoda ürün yoksa ana menüye dön
+        int id = utils.intGirisAl("İşlem yapmak istediğiniz ürünün id numarasını giriniz: ");
 
         if (mevcutUrunler.containsKey(id)) {
             Product product = mevcutUrunler.get(id);
@@ -71,7 +83,19 @@ public class ProductService {
         urunListele1();
     }
 
+    //----------------------------ÜRÜN LİSTELE   --Ahsen H.----------------------------//
+
     public void urunListele1() {
+
+
+//        Utils utils=new Utils();
+//        Utils utils1=new Utils();
+//        if (!utils1.urunKontrol())
+//        {
+//            System.out.println("Listede henüz ürün mevcut değil.");
+//            return; // Depoda ürün yoksa ana menüye dön
+//        }
+//        int id = utils.intGirisAl("İşlem yapmak istediğiniz ürünün id numarasını giriniz: ");
 
         System.out.printf("%10s %10s %10s %10s %10s %10s%n", "ID", "İsim", "Üretici", "Miktar", "Birim", "Raf");
         System.out.println("----------------------------------------------------------------");
@@ -86,19 +110,12 @@ public class ProductService {
         }
     }
 
-    //ÜRÜN LİSTELEME   --Ahsen H.
-
-    //ÜRÜN GİRİŞİ      --Hatice Angılcı.
-    //RAFA KOYMA       --Kerim H.
-    //ÜRÜN ÇIKIŞI      --Yuşa H.
-    //GÜNCELLEME       --ALPER h. Esra AKINEDEN
-    //ARAMA            --Lambda ile ürüne-üreticiye-kalan miktara göre arama yapılacak...
+    //----------------------------ÜRÜN GÜNCELLE   --Esra H.----------------------------//
     public void urunuGuncelle() {
-        if (!Utils.Utils1.urunKontrol(mevcutUrunler)) return;
-
 
         Utils utils=new Utils();
 
+        if (!Utils.urunKontrol(mevcutUrunler)) return; // Depoda ürün yoksa ana menüye dön
         int id = utils.intGirisAl("İşlem yapmak istediğiniz ürünün id numarasını giriniz: ");
 
         if (mevcutUrunler.containsKey(id)) {
@@ -143,7 +160,7 @@ public class ProductService {
             System.out.print("Yeni Raf (güncellenmeyecekse boş bırakın): ");
             String yeniRaf = input.nextLine();
             if (!yeniRaf.trim().isEmpty()) {
-                product.setRaf("raf" + yeniRaf);
+                product.setRaf(yeniRaf);
             }
 
             System.out.println("Ürün bilgileri başarıyla güncellendi.");
@@ -151,17 +168,23 @@ public class ProductService {
             System.out.println("Bu ID numarası ile bir ürün bulunamadı.");
         }
 
-        //urunListele(); // Güncellenmiş ürün listesini göster
+        urunListele1(); // Güncellenmiş ürün listesini göster
     }
-
 
 
 
     public void urunRafakoyma() {
 
+
+        Utils utils=new Utils();
+        Utils utils1=new Utils();
+        if (!Utils.urunKontrol(mevcutUrunler)) return; // Depoda ürün yoksa ana menüye dön
+        int id = utils.intGirisAl("İşlem yapmak istediğiniz ürünün id numarasını giriniz: ");
+
+
         System.out.println("rafa koymak isteğiniz ürünün ıd sini giriniz :");
-        int id = input.nextInt();
         input.nextLine();
+
 
 
         if (mevcutUrunler.containsKey(id)) {
@@ -211,9 +234,13 @@ public class ProductService {
 
 
 
-    //----------------------------Urun Arama-----------------------------
+    //----------------------------ÜRÜN ARAMA   --Alper H.----------------------------//
+
 
     public void urunArama() {
+
+       if (!Utils.urunKontrol(mevcutUrunler)) return; // Depoda ürün yoksa ana menüye dön
+
         System.out.println("----Lutfen Arama Turunu Seciniz----");
         System.out.println("1-Urun Ismi ile Arama");
         System.out.println("2-Uretici Ismi ile Arama");
@@ -274,8 +301,6 @@ public class ProductService {
                 break;
         }
 
-
     }
-
 
 }

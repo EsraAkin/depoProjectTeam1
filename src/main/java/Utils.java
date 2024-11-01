@@ -32,5 +32,12 @@ public class Utils {
         }
     }
 
+        public static boolean urunKontrol(Map<Integer, Product> mevcutUrunler) {
+            if (mevcutUrunler.isEmpty()) {
+                System.out.println("Depoda henüz tanımlanmış bir ürün yok! Lütfen önce bir ürün tanımlayın.");
+                return false; // Depoda ürün yoksa false döner
+            }
+            return true; // Depoda ürün varsa true döner
+        }
 
 }

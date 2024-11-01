@@ -19,7 +19,6 @@ public class Product {
 
     //get set
 
-
     public Integer getIdCounter() {
         return idCounter;
     }

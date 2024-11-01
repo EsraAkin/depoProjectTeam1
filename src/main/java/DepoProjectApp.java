@@ -48,23 +48,18 @@ public class DepoProjectApp {
 
                 break;
                 case 2:
-                    //Ürün Listeleme
                     productService.urunListele1();
                     break;
                 case 3:
-                    //Ürün Girişi
                     productService.urunGirisi();
                     break;
                 case 4:
-                    //Rafa Koyma
                     productService.urunRafakoyma();
                     break;
                 case 5:
                     //Ürün Çıkışı
                     break;
                 case 6:
-                    //Ürün güncelle
-
                     productService.urunuGuncelle();
                     break;
                 case 7:
@@ -77,7 +72,7 @@ public class DepoProjectApp {
                 default:
                     if (secim != -1) {
                         System.out.println("Hatalı giriş! Lütfen menüden bir tamsayı değer giriniz : ");
-                    } else if (!(secim >= 0 && secim < 6)) {
+                    } else if (!(secim >= 0 && secim < 8)) {
                         System.out.println("Hatalı giriş! Lütfen menüden bir tamsayı değer giriniz : ");
                     }
                     break;
@@ -86,12 +81,5 @@ public class DepoProjectApp {
         } while (secim != 0);
         input.close();
     }
-
-
-
-
-
-
-
 
 }
