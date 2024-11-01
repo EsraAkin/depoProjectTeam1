@@ -165,4 +165,59 @@ public class ProductService {
     }
 
 
+    //----------------------------Urun Arama-----------------------------
+
+    public void urunArama() {
+        System.out.println("----Lutfen Arama Turunu Seciniz----");
+        System.out.println("1-Urun Ismi ile Arama");
+        System.out.println("2-Uretici Ismi ile Arama");
+        System.out.println("3-Miktar Altindaki Urunleri Arama");
+
+        int secim = input.nextInt();
+        input.nextLine();
+
+
+
+        switch (secim) {
+            case 1:
+                System.out.println("Lutfen Aranacak Urun Ismini Giriniz");
+                String aranacakIsim = input.nextLine();
+                System.out.printf("%-20s | %-20s | %-20s | %-10s | %-10s | %-10s%n",
+                        "Urun Numarasi", "Urun Ismi", "Uretici Ismi", "Miktar", "Birim", "Raf");
+                System.out.println("-".repeat(95));
+                mevcutUrunler.values().stream()
+                        .filter(t -> t.getUrunIsmi().equalsIgnoreCase(aranacakIsim))
+                        .forEach(System.out::println);
+                System.out.println("Aramanız tamamlandı. Teşekkür ederiz!");
+                break;
+
+            case 2:
+                System.out.println("Lutfen Aranacak Urun Ureticisini Giriniz");
+                String aranacakUretici = input.nextLine();
+                System.out.printf("%-20s | %-20s | %-20s | %-10s | %-10s | %-10s%n",
+                        "Urun Numarasi", "Urun Ismi", "Uretici Ismi", "Miktar", "Birim", "Raf");
+                System.out.println("-".repeat(95));
+                mevcutUrunler.values().stream().filter(t -> t.getUretici().equalsIgnoreCase(aranacakUretici)).forEach(System.out::println);
+                System.out.println("Aramanız tamamlandı. Teşekkür ederiz!");
+                break;
+
+            case 3:
+                System.out.println("Lutfen Miktar Sinirini Giriniz");
+                int miktarUstSinir = input.nextInt();
+                System.out.printf("%-20s | %-20s | %-20s | %-10s | %-10s | %-10s%n",
+                        "Urun Numarasi", "Urun Ismi", "Uretici Ismi", "Miktar", "Birim", "Raf");
+                System.out.println("-".repeat(95));
+                mevcutUrunler.values().stream().filter(t -> t.getMiktar() <= miktarUstSinir).forEach(System.out::println);
+                System.out.println("Aramanız tamamlandı. Teşekkür ederiz!");
+                break;
+
+            default:
+                System.out.println("Gecersiz Bir Secim Yaptiniz");
+                break;
+        }
+
+
+    }
+
+
 }
