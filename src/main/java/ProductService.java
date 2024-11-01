@@ -3,7 +3,7 @@
 //ÜRÜN LİSTELEME   --Ahsen H.
 //ÜRÜN GİRİŞİ      --Hatice H.
 //RAFA KOYMA       --Kerim H.
-//ÜRÜN ÇIKIŞI      --Yuşa H.
+//ÜRÜN ÇIKIŞI      --Yuşa H.--
 //GÜNCELLEME       --Esra H.
 //ARAMA            --Alper H. Lambda ile ürüne-üreticiye-kalan miktara göre arama yapılacak...
 
@@ -11,6 +11,7 @@
 import java.util.*;
 
 public class ProductService {
+
 
     Scanner input = new Scanner(System.in);
     String urunIsmi;
@@ -29,6 +30,7 @@ public class ProductService {
         urunIsmi = input.nextLine();
         System.out.println("Lütfen Üretici İsmi Giriniz");
         uretici = input.nextLine();
+
 
         boolean urunBulunduMu = false;
 
@@ -61,8 +63,12 @@ public class ProductService {
 
     public void urunGirisi() {
 
+        Utils utils=new Utils();
+        Utils utils1=new Utils();
+        if (!utils1.urunKontrol()) return; // Depoda ürün yoksa ana menüye dön
+        int id = utils.intGirisAl("İşlem yapmak istediğiniz ürünün id numarasını giriniz: ");
+
         System.out.println("Miktar güncellemek için Id'yi giriniz :");
-        int id = input.nextInt();
 
         if (mevcutUrunler.containsKey(id)) {
             Product product = mevcutUrunler.get(id);
@@ -84,6 +90,16 @@ public class ProductService {
 
     public void urunListele1() {
 
+
+//        Utils utils=new Utils();
+//        Utils utils1=new Utils();
+//        if (!utils1.urunKontrol())
+//        {
+//            System.out.println("Listede henüz ürün mevcut değil.");
+//            return; // Depoda ürün yoksa ana menüye dön
+//        }
+//        int id = utils.intGirisAl("İşlem yapmak istediğiniz ürünün id numarasını giriniz: ");
+
         System.out.printf("%10s %10s %10s %10s %10s %10s%n", "ID", "İsim", "Üretici", "Miktar", "Birim", "Raf");
         System.out.println("----------------------------------------------------------------");
         Set<Map.Entry<Integer, Product>> mevUrunList = mevcutUrunler.entrySet();
@@ -99,11 +115,10 @@ public class ProductService {
 
     //----------------------------ÜRÜN GÜNCELLE   --Esra H.----------------------------//
     public void urunuGuncelle() {
-        if (!urunKontrol()) return; // Depoda ürün yoksa ana menüye dön
-
 
         Utils utils=new Utils();
-
+        Utils utils1=new Utils();
+        if (!utils1.urunKontrol()) return; // Depoda ürün yoksa ana menüye dön
         int id = utils.intGirisAl("İşlem yapmak istediğiniz ürünün id numarasını giriniz: ");
 
         if (mevcutUrunler.containsKey(id)) {
@@ -162,9 +177,15 @@ public class ProductService {
 
     public void urunRafakoyma() {
 
+        Utils utils=new Utils();
+        Utils utils1=new Utils();
+        if (!utils1.urunKontrol()) return; // Depoda ürün yoksa ana menüye dön
+        int id = utils.intGirisAl("İşlem yapmak istediğiniz ürünün id numarasını giriniz: ");
+
+
         System.out.println("rafa koymak isteğiniz ürünün ıd sini giriniz :");
-        int id = input.nextInt();
         input.nextLine();
+
 
 
         if (mevcutUrunler.containsKey(id)) {
@@ -216,7 +237,16 @@ public class ProductService {
 
     //----------------------------ÜRÜN ARAMA   --Alper H.----------------------------//
 
+
     public void urunArama() {
+
+
+        Utils utils=new Utils();
+        Utils utils1=new Utils();
+        if (!utils1.urunKontrol()) return; // Depoda ürün yoksa ana menüye dön
+        int id = utils.intGirisAl("İşlem yapmak istediğiniz ürünün id numarasını giriniz: ");
+
+
         System.out.println("----Lutfen Arama Turunu Seciniz----");
         System.out.println("1-Urun Ismi ile Arama");
         System.out.println("2-Uretici Ismi ile Arama");
@@ -266,16 +296,5 @@ public class ProductService {
         }
 
     }
-
-    //----------------------------List boşsa yardımcı metodu-----------------------------
-    private boolean urunKontrol() {
-        if (mevcutUrunler.isEmpty()) {
-            System.out.println("Depoda henüz tanımlanmış bir ürün yok! Lütfen önce bir ürün tanımlayın.");
-            return false; // Depoda ürün yoksa false döner
-        }
-        return true; // Depoda ürün varsa true döner
-    }
-
-
 
 }

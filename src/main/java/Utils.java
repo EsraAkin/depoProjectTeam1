@@ -3,6 +3,8 @@ import java.util.Scanner;
 
 public class Utils {
 
+    ProductService productService=new ProductService();
+
     //---------------------------int yerine string exception metodu----------------------
     public int intGirisAl(String mesaj) {
         Scanner input = new Scanner(System.in);
@@ -21,6 +23,13 @@ public class Utils {
         }
     }
 
+    //----------------------------List boşsa yardımcı metodu-----------------------------
+    public boolean urunKontrol() {
+        if (productService.mevcutUrunler.isEmpty()) {
+            System.out.println("Depoda henüz tanımlanmış bir ürün yok! Lütfen önce bir ürün tanımlayın.");
+            return true; // Depoda ürün yoksa false döner
+        }
 
-
+        return false; // Depoda ürün varsa true döner
+    }
 }
