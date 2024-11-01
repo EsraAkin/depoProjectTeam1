@@ -56,6 +56,7 @@ public class DepoProjectApp {
                     break;
                 case 4:
                     //Rafa Koyma
+                    productService.urunRafakoyma();
                     break;
                 case 5:
                     //Ürün Çıkışı

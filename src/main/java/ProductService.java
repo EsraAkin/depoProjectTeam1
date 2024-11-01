@@ -165,6 +165,61 @@ public class ProductService {
     }
 
 
+
+    public void urunRafakoyma() {
+
+        System.out.println("rafa koymak isteğiniz ürünün ıd sini giriniz :");
+        int id = input.nextInt();
+        input.nextLine();
+
+
+        if (mevcutUrunler.containsKey(id)) {
+            Product product = mevcutUrunler.get(id);
+            if (!product.getRaf().equals("null")) {
+                System.out.println("ürünün zaten raf numarası " + product.getRaf() + "noya  yerleştirilmiştir");
+
+            } else {
+
+                System.out.println("Lütfen raf numarasını giriniz(Sadece 100 ile 999 arasında sayı giriniz) :");
+                String yeniRaf12 = input.nextLine();
+
+                try {
+                    int yeniRaf=Integer.parseInt(yeniRaf12)  ;
+
+
+                    if (yeniRaf >= 100 && yeniRaf <= 900) {
+                        boolean rafDolu = mevcutUrunler.values().stream().anyMatch(mevcut -> mevcut.getRaf().equals(String.valueOf(yeniRaf)));
+
+
+                        if (!rafDolu) {
+                            product.setRaf(String.valueOf(yeniRaf));
+                            System.out.println("ürün başarıyla raf" + yeniRaf + "numarasına yerleştirilmiştir");
+
+                        } else {
+                            System.out.println("bu raf numarası başka bir ürün tarafından kullanılmaktadır");
+
+                        }
+                    } else {
+                        System.out.println("geçersiz raf numarası lütfen 100 ile 999 arasında bir sayı giriniz");
+                    }
+
+
+
+                }catch (NumberFormatException e){
+                    System.out.println("geçersiz raf numarası lütfen sayısal bir değer giriniz");
+                }
+            }
+        }else {
+            System.out.println("geçersiz ürün idsi ");
+
+
+        }
+        urunListele1();
+    }
+
+
+
+
     //----------------------------Urun Arama-----------------------------
 
     public void urunArama() {
