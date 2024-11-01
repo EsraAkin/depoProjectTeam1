@@ -94,7 +94,7 @@ public class ProductService {
     //GÜNCELLEME       --ALPER h. Esra AKINEDEN
     //ARAMA            --Lambda ile ürüne-üreticiye-kalan miktara göre arama yapılacak...
     public void urunuGuncelle() {
-        if (!urunKontrol()) return; // Depoda ürün yoksa ana menüye dön
+        if (!Utils.Utils1.urunKontrol(mevcutUrunler)) return;
 
 
         Utils utils=new Utils();
@@ -154,15 +154,6 @@ public class ProductService {
         //urunListele(); // Güncellenmiş ürün listesini göster
     }
 
-
-    //----------------------------List boşsa yardımcı metodu-----------------------------
-    private boolean urunKontrol() {
-        if (mevcutUrunler.isEmpty()) {
-            System.out.println("Depoda henüz tanımlanmış bir ürün yok! Lütfen önce bir ürün tanımlayın.");
-            return false; // Depoda ürün yoksa false döner
-        }
-        return true; // Depoda ürün varsa true döner
-    }
 
 
 
@@ -227,6 +218,7 @@ public class ProductService {
         System.out.println("1-Urun Ismi ile Arama");
         System.out.println("2-Uretici Ismi ile Arama");
         System.out.println("3-Miktar Altindaki Urunleri Arama");
+        System.out.println("4-Raf Numarasi ile Arama");
 
         int secim = input.nextInt();
         input.nextLine();
@@ -263,6 +255,17 @@ public class ProductService {
                         "Urun Numarasi", "Urun Ismi", "Uretici Ismi", "Miktar", "Birim", "Raf");
                 System.out.println("-".repeat(95));
                 mevcutUrunler.values().stream().filter(t -> t.getMiktar() <= miktarUstSinir).forEach(System.out::println);
+                System.out.println("Aramanız tamamlandı. Teşekkür ederiz!");
+                break;
+            case 4:
+                System.out.println("Lutfen Aranacak Raf Numarasini Giriniz");
+                String aranacakRaf = input.nextLine();
+                System.out.printf("%-20s | %-20s | %-20s | %-10s | %-10s | %-10s%n",
+                        "Urun Numarasi", "Urun Ismi", "Uretici Ismi", "Miktar", "Birim", "Raf");
+                System.out.println("-".repeat(95));
+                mevcutUrunler.values().stream()
+                        .filter(t -> t.getRaf().equalsIgnoreCase(aranacakRaf))
+                        .forEach(System.out::println);
                 System.out.println("Aramanız tamamlandı. Teşekkür ederiz!");
                 break;
 
