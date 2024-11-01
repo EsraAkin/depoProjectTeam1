@@ -27,6 +27,7 @@ public class DepoProjectApp {
             System.out.println("4-Ürün Rafa Koyma");
             System.out.println("5-Ürün Çıkışi");
             System.out.println("6-Ürün Güncelle");
+            System.out.println("7-Ürün Arama");
             System.out.println("0-ÇIKIŞ");
 
             //Kullanıcı int yerine string girerse exeption kontrolü yapıyotuz.

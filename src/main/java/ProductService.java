@@ -172,6 +172,7 @@ public class ProductService {
         System.out.println("1-Urun Ismi ile Arama");
         System.out.println("2-Uretici Ismi ile Arama");
         System.out.println("3-Miktar Altindaki Urunleri Arama");
+        System.out.println("4-Raf Numarasi ile Arama");
 
         int secim = input.nextInt();
         input.nextLine();
@@ -208,6 +209,17 @@ public class ProductService {
                         "Urun Numarasi", "Urun Ismi", "Uretici Ismi", "Miktar", "Birim", "Raf");
                 System.out.println("-".repeat(95));
                 mevcutUrunler.values().stream().filter(t -> t.getMiktar() <= miktarUstSinir).forEach(System.out::println);
+                System.out.println("Aramanız tamamlandı. Teşekkür ederiz!");
+                break;
+            case 4:
+                System.out.println("Lutfen Aranacak Raf Numarasini Giriniz");
+                String aranacakRaf = input.nextLine();
+                System.out.printf("%-20s | %-20s | %-20s | %-10s | %-10s | %-10s%n",
+                        "Urun Numarasi", "Urun Ismi", "Uretici Ismi", "Miktar", "Birim", "Raf");
+                System.out.println("-".repeat(95));
+                mevcutUrunler.values().stream()
+                        .filter(t -> t.getRaf().equalsIgnoreCase(aranacakRaf))
+                        .forEach(System.out::println);
                 System.out.println("Aramanız tamamlandı. Teşekkür ederiz!");
                 break;
 
