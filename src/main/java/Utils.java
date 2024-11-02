@@ -34,14 +34,17 @@ public class Utils {
             return true; // Depoda ürün varsa true döner
         }
 
-        public static String capitilize(String inputString) {
 
-            if (inputString == null || inputString.isEmpty()) {
-                return inputString;
-            }
-
-            return inputString.substring(0, 1).toUpperCase() + inputString.substring(1);
-
-        }
     }
+
+    public static String capitilize(String inputString) {
+
+        if (inputString == null || inputString.isEmpty()) {
+            return inputString;
+        }
+
+        return inputString.substring(0, 1).toUpperCase() + inputString.substring(1);
+
+    }
+
 }

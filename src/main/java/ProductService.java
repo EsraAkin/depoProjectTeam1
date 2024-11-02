@@ -107,12 +107,12 @@ public class ProductService {
 
             Product value = entry.getValue();
             System.out.printf("%-20s | %-20s | %-20s | %-10s | %-10s | %-10s%n",
-                    Utils.Utils1.capitilize(product.getIdCounter().toString()),
-                    Utils.Utils1.capitilize(value.getUrunIsmi()),
-                    Utils.Utils1.capitilize(value.getUretici()),
-                    Utils.Utils1.capitilize(((Integer)(value.getMiktar())).toString()),
-                    Utils.Utils1.capitilize(value.getBirim()),
-                    Utils.Utils1.capitilize(value.getRaf()));
+                    Utils.capitilize(product.getIdCounter().toString()),
+                    Utils.capitilize(value.getUrunIsmi()),
+                    Utils.capitilize(value.getUretici()),
+                    Utils.capitilize(((Integer)(value.getMiktar())).toString()),
+                    Utils.capitilize(value.getBirim()),
+                    Utils.capitilize(value.getRaf()));
 
         }
     }
