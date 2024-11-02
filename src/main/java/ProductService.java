@@ -170,64 +170,52 @@ public class ProductService {
 
        //----------------------------ÜRÜN RAFA KOYMA   --Kerim H.----------------------------//
     public void urunRafakoyma() {
-
-        Utils utils=new Utils();
-        Utils utils1=new Utils();
-        if (!Utils.Utils1.urunKontrol(mevcutUrunler)) return; // Depoda ürün yoksa ana menüye dön
-        int id = utils.intGirisAl("İşlem yapmak istediğiniz ürünün id numarasını giriniz: ");
-
-
-        System.out.println("rafa koymak isteğiniz ürünün ıd sini giriniz :");
+        if (mevcutUrunler.isEmpty()) {
+            System.out.println("Depoda henüz tanımlanmış bir ürün yok! Lütfen önce bir ürün tanımlayın.");
+            return; // Ürün yoksa çık
+        }
+        Utils utils = new Utils();
+        System.out.println("Rafa koymak istediğiniz ürünün ID numarasını giriniz:");
+        int id = input.nextInt();
         input.nextLine();
-
-
 
         if (mevcutUrunler.containsKey(id)) {
             Product product = mevcutUrunler.get(id);
-            if (!product.getRaf().equals("null")) {
-                System.out.println("ürünün zaten raf numarası " + product.getRaf() + "noya  yerleştirilmiştir");
 
-            } else {
-
-                System.out.println("Lütfen raf numarasını giriniz(Sadece 100 ile 999 arasında sayı giriniz) :");
-                String yeniRaf12 = input.nextLine();
-
-                try {
-                    int yeniRaf=Integer.parseInt(yeniRaf12)  ;
-
-
-                    if (yeniRaf >= 100 && yeniRaf <= 900) {
-                        boolean rafDolu = mevcutUrunler.values().stream().anyMatch(mevcut -> mevcut.getRaf().equals(String.valueOf(yeniRaf)));
-
-
-                        if (!rafDolu) {
-                            product.setRaf(String.valueOf(yeniRaf));
-                            System.out.println("ürün başarıyla raf" + yeniRaf + "numarasına yerleştirilmiştir");
-
-                        } else {
-                            System.out.println("bu raf numarası başka bir ürün tarafından kullanılmaktadır");
-
-                        }
-                    } else {
-                        System.out.println("geçersiz raf numarası lütfen 100 ile 999 arasında bir sayı giriniz");
-                    }
-
-
-
-                }catch (NumberFormatException e){
-                    System.out.println("geçersiz raf numarası lütfen sayısal bir değer giriniz");
-                }
+            if (product.getRaf() != null && !product.getRaf().isEmpty()) {
+                System.out.println("Ürünün zaten bir raf numarası var: " + product.getRaf());
+                return;
             }
-        }else {
-            System.out.println("geçersiz ürün idsi ");
 
+            System.out.println("Lütfen raf numarasını giriniz (100 ile 999 arasında): ");
+            String yeniRafStr = input.nextLine();
 
+            try {
+                int yeniRaf = Integer.parseInt(yeniRafStr);
+
+                if (yeniRaf >= 100 && yeniRaf <= 999) {
+                    // Başka bir ürün aynı raf numarasına sahip mi?
+                    boolean rafDolu = mevcutUrunler.values().stream()
+                            .anyMatch(p -> yeniRafStr.equals(p.getRaf()));
+
+                    if (!rafDolu) {
+                        product.setRaf(yeniRafStr);
+                        System.out.println("Ürün başarıyla raf " + yeniRaf + " numarasına yerleştirildi.");
+                    } else {
+                        System.out.println("Bu raf numarası başka bir ürün tarafından kullanılmaktadır.");
+                    }
+                } else {
+                    System.out.println("Geçersiz raf numarası! Lütfen 100 ile 999 arasında bir sayı giriniz.");
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Geçersiz raf numarası! Lütfen sayısal bir değer giriniz.");
+            }
+        } else {
+            System.out.println("Geçersiz ürün ID'si. Lütfen geçerli bir ID giriniz.");
         }
-        urunListele1();
+
+        urunListele1(); // Güncel listeyi göster
     }
-
-
-
 
     //----------------------------ÜRÜN ARAMA   --Alper H.----------------------------//
 
