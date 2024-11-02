@@ -97,15 +97,16 @@ public class ProductService {
 //        }
 //        int id = utils.intGirisAl("İşlem yapmak istediğiniz ürünün id numarasını giriniz: ");
 
-        System.out.printf("%10s %10s %10s %10s %10s %10s%n", "ID", "İsim", "Üretici", "Miktar", "Birim", "Raf");
-        System.out.println("----------------------------------------------------------------");
+        System.out.printf("%-20s | %-20s | %-20s | %-10s | %-10s | %-10s%n",
+                "Urun Numarasi", "Urun Ismi", "Uretici Ismi", "Miktar", "Birim", "Raf");
+        System.out.println("-".repeat(100));
         Set<Map.Entry<Integer, Product>> mevUrunList = mevcutUrunler.entrySet();
         for (Map.Entry<Integer, Product> entry : mevUrunList) {
             Product product = entry.getValue();
 
 
             Product value = entry.getValue();
-            System.out.printf("%10s %10s %10s %10s %10s %10s%n\n", product.getIdCounter(), value.getUrunIsmi(), value.getUretici(), value.getMiktar(), value.getBirim(), value.getRaf());
+            System.out.printf("%-20s | %-20s | %-20s | %-10s | %-10s | %-10s%n", product.getIdCounter(), value.getUrunIsmi(), value.getUretici(), value.getMiktar(), value.getBirim(), value.getRaf());
 
         }
     }
