@@ -9,6 +9,7 @@
 
 
 import java.util.*;
+import java.util.stream.Stream;
 
 public class ProductService {
 
@@ -222,57 +223,69 @@ public class ProductService {
 
     public void urunArama() {
 
-
-        if (!Utils.Utils1.urunKontrol(mevcutUrunler)) return; // Depoda ürün yoksa ana menüye dön
-
-        System.out.println("----Lutfen Arama Turunu Seciniz----");
-        System.out.println("1-Urun Ismi ile Arama");
-        System.out.println("2-Uretici Ismi ile Arama");
-        System.out.println("3-Miktar Altindaki Urunleri Arama");
-
-        int secim = input.nextInt();
-        input.nextLine();
-
-
-
-        switch (secim) {
-            case 1:
-                System.out.println("Lutfen Aranacak Urun Ismini Giriniz");
-                String aranacakIsim = input.nextLine();
-                System.out.printf("%-20s | %-20s | %-20s | %-10s | %-10s | %-10s%n",
-                        "Urun Numarasi", "Urun Ismi", "Uretici Ismi", "Miktar", "Birim", "Raf");
-                System.out.println("-".repeat(95));
-                mevcutUrunler.values().stream()
-                        .filter(t -> t.getUrunIsmi().equalsIgnoreCase(aranacakIsim))
-                        .forEach(System.out::println);
-                System.out.println("Aramanız tamamlandı. Teşekkür ederiz!");
-                break;
-
-            case 2:
-                System.out.println("Lutfen Aranacak Urun Ureticisini Giriniz");
-                String aranacakUretici = input.nextLine();
-                System.out.printf("%-20s | %-20s | %-20s | %-10s | %-10s | %-10s%n",
-                        "Urun Numarasi", "Urun Ismi", "Uretici Ismi", "Miktar", "Birim", "Raf");
-                System.out.println("-".repeat(95));
-                mevcutUrunler.values().stream().filter(t -> t.getUretici().equalsIgnoreCase(aranacakUretici)).forEach(System.out::println);
-                System.out.println("Aramanız tamamlandı. Teşekkür ederiz!");
-                break;
-
-            case 3:
-                System.out.println("Lutfen Miktar Sinirini Giriniz");
-                int miktarUstSinir = input.nextInt();
-                System.out.printf("%-20s | %-20s | %-20s | %-10s | %-10s | %-10s%n",
-                        "Urun Numarasi", "Urun Ismi", "Uretici Ismi", "Miktar", "Birim", "Raf");
-                System.out.println("-".repeat(95));
-                mevcutUrunler.values().stream().filter(t -> t.getMiktar() <= miktarUstSinir).forEach(System.out::println);
-                System.out.println("Aramanız tamamlandı. Teşekkür ederiz!");
-                break;
-
-            default:
-                System.out.println("Gecersiz Bir Secim Yaptiniz");
-                break;
+        if (!Utils.Utils1.urunKontrol(mevcutUrunler)) {
+            System.out.println("Depoda ürün olmadığı için ana menüye dönüyorsunuz.");
+            return; // Depoda ürün yoksa ana menüye dön
         }
+        boolean devam = true;
+        while (devam) {
+            System.out.println("----Lutfen Arama Turunu Seciniz----");
+            System.out.println("1-Urun Ismi ile Arama");
+            System.out.println("2-Uretici Ismi ile Arama");
+            System.out.println("3-Miktar Altindaki Urunleri Arama");
+            System.out.println("4-Raf Numarasi ile Arama");
+            System.out.println("0-Ana Menüye Dön");
 
+            int secim = input.nextInt();
+            input.nextLine();
+
+            if (secim == 0) {
+                System.out.println("Ana menüye donuluyor...");
+                devam = false;
+                continue;
+            }
+            Stream<Product> aranan = Stream.empty();
+
+
+            switch (secim) {
+                case 1:
+                    System.out.println("--Lutfen Aranacak Urun Ismini Giriniz--");
+                    String aranacakIsim = input.nextLine();
+                    aranan = mevcutUrunler.values().stream()
+                            .filter(t -> t.getUrunIsmi().equalsIgnoreCase(aranacakIsim));
+                    break;
+                case 2:
+                    System.out.println("--Lutfen Aranacak Urun Ureticisini Giriniz--");
+                    String aranacakUretici = input.nextLine();
+                    aranan = mevcutUrunler.values().stream().filter(t -> t.getUretici().equalsIgnoreCase(aranacakUretici));
+                    break;
+                case 3:
+                    System.out.println("--Lutfen Miktar Sinirini Giriniz--");
+                    int miktarUstSinir = input.nextInt();
+                    aranan = mevcutUrunler.values().stream().filter(t -> t.getMiktar() <= miktarUstSinir);
+                    break;
+                case 4:
+                    System.out.println("--Lutfen Aranacak Raf Numarasini Giriniz--");
+                    String aranacakRaf = input.nextLine();
+                    aranan = mevcutUrunler.values().stream()
+                            .filter(t -> t.getRaf().equalsIgnoreCase(aranacakRaf));
+                    break;
+                default:
+                    System.out.println("Gecersiz bir secim yaptiniz. Lutfen 0 ile 4 arasinda bir sayi giriniz.");
+                    return;
+            }
+            System.out.printf("%-20s | %-20s | %-20s | %-10s | %-10s | %-10s%n",
+                    "Urun Numarasi", "Urun Ismi", "Uretici Ismi", "Miktar", "Birim", "Raf");
+            System.out.println("-".repeat(95));
+
+
+            int urunSayisi = (int) aranan.peek(System.out::println).count();
+            if (urunSayisi == 0) {
+                System.out.println("Aradığınız kriterlere uygun ürün bulunamadı.");
+            }
+            System.out.println("Aramanız tamamlandı. Teşekkür ederiz!");
+
+        }
     }
 
 }
