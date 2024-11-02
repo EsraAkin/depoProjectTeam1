@@ -87,16 +87,6 @@ public class ProductService {
 
     public void urunListele1() {
 
-
-//        Utils utils=new Utils();
-//        Utils utils1=new Utils();
-//        if (!utils1.urunKontrol())
-//        {
-//            System.out.println("Listede henüz ürün mevcut değil.");
-//            return; // Depoda ürün yoksa ana menüye dön
-//        }
-//        int id = utils.intGirisAl("İşlem yapmak istediğiniz ürünün id numarasını giriniz: ");
-
         System.out.printf("%-20s | %-20s | %-20s | %-10s | %-10s | %-10s%n",
                 "Urun Numarasi", "Urun Ismi", "Uretici Ismi", "Miktar", "Birim", "Raf");
         System.out.println("-".repeat(100));
@@ -107,12 +97,12 @@ public class ProductService {
 
             Product value = entry.getValue();
             System.out.printf("%-20s | %-20s | %-20s | %-10s | %-10s | %-10s%n",
-                    Utils.capitilize(product.getIdCounter().toString()),
-                    Utils.capitilize(value.getUrunIsmi()),
-                    Utils.capitilize(value.getUretici()),
-                    Utils.capitilize(((Integer)(value.getMiktar())).toString()),
-                    Utils.capitilize(value.getBirim()),
-                    Utils.capitilize(value.getRaf()));
+                    Utils.capitalize(product.getIdCounter().toString()),
+                    Utils.capitalize(value.getUrunIsmi()),
+                    Utils.capitalize(value.getUretici()),
+                    Utils.capitalize(((Integer)(value.getMiktar())).toString()),
+                    Utils.capitalize(value.getBirim()),
+                    Utils.capitalize(value.getRaf()));
 
         }
     }

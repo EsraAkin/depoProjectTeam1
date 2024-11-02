@@ -18,6 +18,7 @@ public class DepoProjectApp {
 
         do {
 
+            System.out.println();
             System.out.println("-----DEPO ÜRÜN TAKİBİ-----");
 
             System.out.println("Lütfen yapmak istediğiniz işlemi seçiniz: ");

@@ -37,7 +37,7 @@ public class Utils {
 
     }
 
-    public static String capitilize(String inputString) {
+    public static String capitalize(String inputString) {
 
         if (inputString == null || inputString.isEmpty()) {
             return inputString;
