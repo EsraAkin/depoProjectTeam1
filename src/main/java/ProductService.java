@@ -178,7 +178,7 @@ public class ProductService {
             System.out.println("Depoda henüz tanımlanmış bir ürün yok! Lütfen önce bir ürün tanımlayın.");
             return; // Ürün yoksa çık
         }
-        Utils utils=new Utils();
+Utils utils=new Utils();
         int id = utils.intGirisAl("Rafa koymak istediğiniz ürünün ID numarasını giriniz: ");
 
         if (mevcutUrunler.containsKey(id)) {
@@ -218,6 +218,7 @@ public class ProductService {
 
         urunListele1(); // Güncel listeyi göster
     }
+
 
     //----------------------------ÜRÜN ARAMA   --Alper H.----------------------------//
 
