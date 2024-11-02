@@ -13,7 +13,6 @@ public class Product {
         this.uretici = uretici;
         this.miktar = 0;
         this.birim = birim;
-       // this.raf = null;
     }
 
 

@@ -63,7 +63,7 @@ public class ProductService {
     public void urunGirisi() {
 
         Utils utils=new Utils();
-        if (!Utils.urunKontrol(mevcutUrunler)) return; // Depoda ürün yoksa ana menüye dön
+        if (!Utils.Utils1.urunKontrol(mevcutUrunler)) return; // Depoda ürün yoksa ana menüye dön
         int id = utils.intGirisAl("İşlem yapmak istediğiniz ürünün id numarasını giriniz: ");
 
         if (mevcutUrunler.containsKey(id)) {
@@ -86,15 +86,23 @@ public class ProductService {
 
     public void urunListele1() {
 
-        System.out.printf("%10s %10s %10s %10s %10s %10s%n", "ID", "İsim", "Üretici", "Miktar", "Birim", "Raf");
-        System.out.println("----------------------------------------------------------------");
+        System.out.printf("%-20s | %-20s | %-20s | %-10s | %-10s | %-10s%n",
+                "Urun Numarasi", "Urun Ismi", "Uretici Ismi", "Miktar", "Birim", "Raf");
+        System.out.println("-".repeat(100));
+
         Set<Map.Entry<Integer, Product>> mevUrunList = mevcutUrunler.entrySet();
         for (Map.Entry<Integer, Product> entry : mevUrunList) {
             Product product = entry.getValue();
 
 
             Product value = entry.getValue();
-            System.out.printf("%10s %10s %10s %10s %10s %10s%n\n", product.getIdCounter(), value.getUrunIsmi(), value.getUretici(), value.getMiktar(), value.getBirim(), value.getRaf());
+            System.out.printf("%-20s | %-20s | %-20s | %-10s | %-10s | %-10s%n",
+                    Utils.capitalize(product.getIdCounter().toString()),
+                    Utils.capitalize(value.getUrunIsmi()),
+                    Utils.capitalize(value.getUretici()),
+                    Utils.capitalize(((Integer)(value.getMiktar())).toString()),
+                    Utils.capitalize(value.getBirim()),
+                    Utils.capitalize(value.getRaf()));
 
         }
     }
@@ -104,7 +112,7 @@ public class ProductService {
 
         Utils utils=new Utils();
 
-        if (!Utils.urunKontrol(mevcutUrunler)) return; // Depoda ürün yoksa ana menüye dön
+        if (!Utils.Utils1.urunKontrol(mevcutUrunler)) return; // Depoda ürün yoksa ana menüye dön
         int id = utils.intGirisAl("İşlem yapmak istediğiniz ürünün id numarasını giriniz: ");
 
         if (mevcutUrunler.containsKey(id)) {
@@ -160,12 +168,12 @@ public class ProductService {
         urunListele1(); // Güncellenmiş ürün listesini göster
     }
 
-
+       //----------------------------ÜRÜN RAFA KOYMA   --Kerim H.----------------------------//
     public void urunRafakoyma() {
 
         Utils utils=new Utils();
         Utils utils1=new Utils();
-        if (!Utils.urunKontrol(mevcutUrunler)) return; // Depoda ürün yoksa ana menüye dön
+        if (!Utils.Utils1.urunKontrol(mevcutUrunler)) return; // Depoda ürün yoksa ana menüye dön
         int id = utils.intGirisAl("İşlem yapmak istediğiniz ürünün id numarasını giriniz: ");
 
 
@@ -227,11 +235,7 @@ public class ProductService {
     public void urunArama() {
 
 
-        Utils utils=new Utils();
-        Utils utils1=new Utils();
-        if (!Utils.urunKontrol(mevcutUrunler)) return; // Depoda ürün yoksa ana menüye dön
-        int id = utils.intGirisAl("İşlem yapmak istediğiniz ürünün id numarasını giriniz: ");
-
+        if (!Utils.Utils1.urunKontrol(mevcutUrunler)) return; // Depoda ürün yoksa ana menüye dön
 
         System.out.println("----Lutfen Arama Turunu Seciniz----");
         System.out.println("1-Urun Ismi ile Arama");
