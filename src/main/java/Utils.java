@@ -20,10 +20,7 @@ public class Utils {
                 input.nextLine(); // Hatalı girdiyi temizle
             }
         }
-
-
     }
-    //---------------------------int yerine string exception metodu----------------------
 
     public class Utils1 {
         public static boolean urunKontrol(Map<Integer, Product> mevcutUrunler) {
@@ -33,10 +30,7 @@ public class Utils {
             }
             return true; // Depoda ürün varsa true döner
         }
-
-
     }
-
     public static String capitalize(String inputString) {
 
         if (inputString == null || inputString.isEmpty()) {
