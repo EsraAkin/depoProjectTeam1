@@ -49,7 +49,7 @@ public class ProductService {
             System.out.println("Lütfen Ürün birimini giriniz :");
             birim = input.nextLine();
 
-            mevcutUrunler.put(idCounter, new Product(idCounter, urunIsmi, uretici, miktar, birim, raf));
+            mevcutUrunler.put(idCounter, new Product(idCounter, urunIsmi, uretici, miktar, birim));
 
             System.out.println("Ürün başarıyla eklendi: ");
             idCounter++;
