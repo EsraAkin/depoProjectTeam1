@@ -10,7 +10,7 @@ public class DepoProjectApp {
     }
 
     private static void start() {
-
+        Utils utils=new Utils();
         ProductService productService=new ProductService();
 
         Scanner input = new Scanner(System.in);
@@ -33,21 +33,13 @@ public class DepoProjectApp {
 
             //Kullanıcı int yerine string girerse exeption kontrolü yapıyotuz.
 
-            try {
-                secim = input.nextInt();
-                input.nextLine();
-            } catch (InputMismatchException e) {
-                System.out.println("Hatalı giriş! Lütfen menüden bir tamsayı değer giriniz :");
-                input.nextLine(); //Geçersiz girdiyi temizle
-                secim = -1;
-            }
-
+            secim = utils.intGirisAl("Lütfen yapmak istediğiniz işlemi seçiniz: ");
 
             switch (secim) {
                 case 1:
                     productService.urunTanimlama();
 
-                break;
+                    break;
                 case 2:
                     productService.urunListele1();
                     break;
