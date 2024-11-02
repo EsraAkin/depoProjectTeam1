@@ -12,7 +12,6 @@ import java.util.*;
 
 public class ProductService {
 
-
     Scanner input = new Scanner(System.in);
     String urunIsmi;
     String uretici;
@@ -90,6 +89,7 @@ public class ProductService {
         System.out.printf("%-20s | %-20s | %-20s | %-10s | %-10s | %-10s%n",
                 "Urun Numarasi", "Urun Ismi", "Uretici Ismi", "Miktar", "Birim", "Raf");
         System.out.println("-".repeat(100));
+
         Set<Map.Entry<Integer, Product>> mevUrunList = mevcutUrunler.entrySet();
         for (Map.Entry<Integer, Product> entry : mevUrunList) {
             Product product = entry.getValue();
