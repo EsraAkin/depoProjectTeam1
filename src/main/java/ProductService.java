@@ -72,11 +72,13 @@ public class ProductService {
             Product product = mevcutUrunler.get(id);
             System.out.println("Eklemek istediğiniz miktarı giriniz : ");
             int eklenacekMiktar = input.nextInt();
-
-            //Miktar güncelle
-            product.setMiktar(product.getMiktar() + eklenacekMiktar);
-            System.out.println("Güncel ürün miktarı : " + product.getMiktar());
-
+                if(eklenacekMiktar<=0) {
+                System.out.println("Eklemek istediğiniz miktar sıfır ve negatif bir sayı olamaz.Lütfen tam sayı giriniz :");
+              }else {
+                //Miktar güncelle
+                product.setMiktar(product.getMiktar() + eklenacekMiktar);
+                System.out.println("Güncel ürün miktarı : " + product.getMiktar());
+            }
         } else {
             System.out.println("Geçersiz ürün id'si.");
         }
