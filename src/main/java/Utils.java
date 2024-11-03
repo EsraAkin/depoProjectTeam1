@@ -47,4 +47,33 @@ public class Utils {
                 product.getMiktar(), product.getBirim(), product.getRaf());
     }
 
+//    public static boolean bosGecilemez(String str){
+//        if(str==null){
+//            System.out.println("Bu alan boş geçilemez! ");
+//        }
+//        return false;
+//    }
+
+
+    // Boş girdi kontrolü
+    public static boolean isEmpty(String input) {
+        return input == null || input.trim().isEmpty();
+
+    }
+    public static String bosGecılma(String mesaj) {
+        Scanner input = new Scanner(System.in);
+        String kullaniciGirisi = "";
+        while (kullaniciGirisi.isEmpty()) {
+            System.out.print(mesaj);
+            kullaniciGirisi = input.nextLine().trim();
+            if (kullaniciGirisi.isEmpty()) {
+                System.out.println("Hata: Bu alan boş olamaz. Lütfen geçerli bir giriş yapınız.");
+            }
+        }
+        return kullaniciGirisi;
+    }
+
+
+
+
 }
