@@ -50,7 +50,7 @@ public class DepoProjectApp {
                     productService.urunRafakoyma();
                     break;
                 case 5:
-                    //Ürün Çıkışı
+                    productService.urunCikisi();
                     break;
                 case 6:
                     productService.urunuGuncelle();
