@@ -65,7 +65,10 @@ public class ProductService {
     public void urunGirisi() {
 
         Utils utils = new Utils();
-        if (!Utils.Utils1.urunKontrol(mevcutUrunler)) return; // Depoda ürün yoksa ana menüye dön
+        if (!Utils.Utils1.urunKontrol(mevcutUrunler)) {
+            return; // Depoda ürün yoksa ana menüye dön
+        }
+
         int id = utils.intGirisAl("İşlem yapmak istediğiniz ürünün id numarasını giriniz: ");
 
         if (mevcutUrunler.containsKey(id)) {
