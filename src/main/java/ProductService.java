@@ -200,54 +200,51 @@ public class ProductService {
     }
     
     //----------------------------ÜRÜN RAFA KOYMA   --Kerim H.----------------------------//
-    public void urunRafakoyma() {
-        Utils utils = new Utils();
+public void urunRafakoyma() {
+    Utils utils = new Utils();
 
-        if (!Utils.Utils1.urunKontrol(mevcutUrunler)) return; // Depoda ürün yoksa ana menüye dön
+    if (!Utils.Utils1.urunKontrol(mevcutUrunler)) return; // Depoda ürün yoksa ana menüye dön
 
-        // Ürün ID'sini alma
-        int id = utils.intGirisAl("İşlem yapmak istediğiniz ürünün id numarasını giriniz: ");
+    int id = utils.intGirisAl("İşlem yapmak istediğiniz ürünün id numarasını giriniz: ");
+    
+    if (mevcutUrunler.containsKey(id)) {
+        Product product = mevcutUrunler.get(id);
 
-        // Ürün mevcut mu kontrol etme
-        if (mevcutUrunler.containsKey(id)) {
-            Product product = mevcutUrunler.get(id);
-
-            // Ürünün zaten bir raf numarası var mı kontrol etme
-            if (product.getRaf() != null && !product.getRaf().isEmpty()) {
-                System.out.println("Ürünün zaten bir raf numarası var: " + product.getRaf());
-                return;
-            }
-
-            // Raf numarasını girme ve buffer temizleme
-            System.out.println("Lütfen raf numarasını giriniz (100 ile 999 arasında): ");
-            String yeniRafStr = input.nextLine(); // Tampon temizliği için nextLine() kullanıyoruz
-
-            try {
-                int yeniRaf = Integer.parseInt(yeniRafStr);
-
-                if (yeniRaf >= 100 && yeniRaf <= 999) {
-                    // Başka bir ürün aynı raf numarasına sahip mi?
-                    boolean rafDolu = mevcutUrunler.values().stream()
-                            .anyMatch(p -> yeniRafStr.equals(p.getRaf()));
-
-                    if (!rafDolu) {
-                        product.setRaf(yeniRafStr);
-                        System.out.println("Ürün başarıyla " + yeniRaf + " nolu rafa yerleştirildi.");
-                    } else {
-                        System.out.println("Bu raf numarası başka bir ürün tarafından kullanılmaktadır.");
-                    }
-                } else {
-                    System.out.println("Geçersiz raf numarası! Lütfen 100 ile 999 arasında bir sayı giriniz.");
-                }
-            } catch (NumberFormatException e) {
-                System.out.println("Geçersiz raf numarası! Lütfen sayısal bir değer giriniz.");
-            }
-        } else {
-            System.out.println("Geçersiz ürün ID'si. Lütfen geçerli bir ID giriniz.");
+        if (product.getRaf() != null && !product.getRaf().isEmpty()) {
+            System.out.println("Ürünün zaten bir raf numarası var: " + product.getRaf());
+            return;
         }
 
-        urunListele1(); // Güncel listeyi göster
+        System.out.println("Lütfen raf numarasını giriniz (100 ile 999 arasında): ");
+        
+        // Eğer burada sayı alacaksanız, buffer temizliğini sağlayın
+        String yeniRafStr = input.nextLine().trim(); // nextInt'ten sonra kullanıyorsanız buffer temizliği önemli
+        
+        try {
+            int yeniRaf = Integer.parseInt(yeniRafStr);
+
+            if (yeniRaf >= 100 && yeniRaf <= 999) {
+                boolean rafDolu = mevcutUrunler.values().stream()
+                        .anyMatch(p -> yeniRafStr.equals(p.getRaf()));
+
+                if (!rafDolu) {
+                    product.setRaf(yeniRafStr);
+                    System.out.println("Ürün başarıyla " + yeniRaf + " nolu rafa yerleştirildi.");
+                } else {
+                    System.out.println("Bu raf numarası başka bir ürün tarafından kullanılmaktadır.");
+                }
+            } else {
+                System.out.println("Geçersiz raf numarası! Lütfen 100 ile 999 arasında bir sayı giriniz.");
+            }
+        } catch (NumberFormatException e) {
+            System.out.println("Geçersiz raf numarası! Lütfen sayısal bir değer giriniz.");
+        }
+    } else {
+        System.out.println("Geçersiz ürün ID'si. Lütfen geçerli bir ID giriniz.");
     }
+
+    urunListele1(); // Güncel listeyi göster
+}
 
 
     //----------------------------ÜRÜN ARAMA   --Alper H.----------------------------//
