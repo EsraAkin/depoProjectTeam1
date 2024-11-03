@@ -41,4 +41,10 @@ public class Utils {
 
     }
 
+    public static String urunFormatlama(Product product) {
+        return String.format("%-20s | %-20s | %-20s | %-10s | %-10s | %-10s",
+                product.getIdCounter(), product.getUrunIsmi(), product.getUretici(),
+                product.getMiktar(), product.getBirim(), product.getRaf());
+    }
+
 }

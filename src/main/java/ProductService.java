@@ -227,7 +227,7 @@ public class ProductService {
     public void urunArama() {
 
         if (!Utils.Utils1.urunKontrol(mevcutUrunler)) {
-            System.out.println("Depoda ürün olmadığı için ana menüye dönüyorsunuz.");
+            System.out.println("--Depoda ürün olmadığı için ana menüye dönüyorsunuz.--");
             return; // Depoda ürün yoksa ana menüye dön
         }
         boolean devam = true;
@@ -274,7 +274,7 @@ public class ProductService {
                             .filter(t -> t.getRaf().equalsIgnoreCase(aranacakRaf));
                     break;
                 default:
-                    System.out.println("Gecersiz bir secim yaptiniz. Lutfen 0 ile 4 arasinda bir sayi giriniz.");
+                    System.out.println("--Gecersiz bir secim yaptiniz. Lutfen 0 ile 4 arasinda bir sayi giriniz.--");
                     return;
             }
             System.out.printf("%-20s | %-20s | %-20s | %-10s | %-10s | %-10s%n",
@@ -282,11 +282,11 @@ public class ProductService {
             System.out.println("-".repeat(95));
 
 
-            int urunSayisi = (int) aranan.peek(System.out::println).count();
+            int urunSayisi = (int) aranan.peek(product -> System.out.println(Utils.urunFormatlama(product))).count();
             if (urunSayisi == 0) {
-                System.out.println("Aradığınız kriterlere uygun ürün bulunamadı.");
+                System.out.println("--Aradığınız kriterlere uygun ürün bulunamadı.--");
             }
-            System.out.println("Aramanız tamamlandı. Teşekkür ederiz!");
+            System.out.println("--Aramanız tamamlandı. Teşekkür ederiz!--");
 
         }
     }
