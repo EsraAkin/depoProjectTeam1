@@ -3,7 +3,7 @@
 //ÜRÜN LİSTELEME   --Ahsen H.
 //ÜRÜN GİRİŞİ      --Hatice H.
 //RAFA KOYMA       --Kerim H.
-//ÜRÜN ÇIKIŞI      --Yuşa H.--
+//ÜRÜN ÇIKIŞI      --Yuşa H.
 //GÜNCELLEME       --Esra H.
 //ARAMA            --Alper H. Lambda ile ürüne-üreticiye-kalan miktara göre arama yapılacak...
 
@@ -174,6 +174,31 @@ public class ProductService {
         urunListele1(); // Güncellenmiş ürün listesini göster
     }
 
+     //-----------------------Ürün Çıkışı------Yuşa H.-------------------------------------//
+    public void urunCikisi() {
+
+            Utils utils = new Utils();
+            if (!Utils.Utils1.urunKontrol(mevcutUrunler)) return; // Depoda ürün yoksa ana menüye dön
+            int id = utils.intGirisAl("İşlem yapmak istediğiniz ürünün id numarasını giriniz: ");
+
+        if (mevcutUrunler.containsKey(id)) {  //Ürün varsa miktar kontrolü yapalım.
+            System.out.println(id + " id numaralı " + mevcutUrunler.get(id).getUrunIsmi() + " " +mevcutUrunler.get(id).getMiktar() +" "+mevcutUrunler.get(id).getBirim()+ " mevcuttur.");
+
+            System.out.println(" Çıkış yapmak istediğiniz miktarı yazınız.");
+            int cikisMiktari = input.nextInt();
+            Product product = mevcutUrunler.get(id); // ID'ye göre ürünü alıyoruz
+            if (mevcutUrunler.get(id).getMiktar() >= cikisMiktari) {
+                product.setMiktar(product.getMiktar() - cikisMiktari);
+            } else {
+                System.out.println(" Çıkış miktarı mevcut miktardan fazla olamaz!");
+            }
+
+        } else {
+            System.out.println("Bu id numarası ile ürün bulunamadı.");
+        }
+        urunListele1();
+    }
+    
     //----------------------------ÜRÜN RAFA KOYMA   --Kerim H.----------------------------//
     public void urunRafakoyma() {
         Utils utils = new Utils();
@@ -223,7 +248,6 @@ public class ProductService {
 
         urunListele1(); // Güncel listeyi göster
     }
-
 
 
     //----------------------------ÜRÜN ARAMA   --Alper H.----------------------------//
