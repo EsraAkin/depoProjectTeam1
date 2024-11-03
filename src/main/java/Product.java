@@ -67,6 +67,6 @@ public class Product {
         this.raf = raf;
     }
 
-    
+
 
 }
