@@ -282,7 +282,7 @@ public class ProductService {
             System.out.println("-".repeat(95));
 
 
-            int urunSayisi = (int) aranan.peek(System.out::println).count();
+            int urunSayisi = (int) aranan.peek(product -> System.out.println(Utils.urunFormatlama(product))).count();
             if (urunSayisi == 0) {
                 System.out.println("Aradığınız kriterlere uygun ürün bulunamadı.");
             }
