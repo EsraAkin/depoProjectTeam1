@@ -8,6 +8,8 @@
 //ARAMA            --Alper H. Lambda ile ürüne-üreticiye-kalan miktara göre arama yapılacak...
 
 
+import jdk.jshell.execution.Util;
+
 import java.util.*;
 import java.util.stream.Stream;
 
@@ -135,9 +137,7 @@ public class ProductService {
 
     //----------------------------ÜRÜN GÜNCELLE   --Esra H.----------------------------//
     public void urunuGuncelle() {
-
-        Utils utils = new Utils();
-
+        Utils utils=new Utils();
         if (!Utils.Utils1.urunKontrol(mevcutUrunler)) return; // Depoda ürün yoksa ana menüye dön
         int id = utils.intGirisAl("İşlem yapmak istediğiniz ürünün id numarasını giriniz: ");
 
@@ -180,10 +180,24 @@ public class ProductService {
             }
 
             System.out.println("Mevcut Raf: " + product.getRaf());
-            System.out.print("Yeni Raf (güncellenmeyecekse boş bırakın): ");
-            String yeniRaf = input.nextLine();
-            if (!yeniRaf.trim().isEmpty()) {
-                product.setRaf(yeniRaf);
+            while (true) {
+                System.out.print("Yeni Raf (güncellenmeyecekse boş bırakın, 100 ile 999 arasında olmalı): ");
+                String yeniRafStr = input.nextLine().trim();
+                if (yeniRafStr.isEmpty()) {
+                    break; // Boş bırakılırsa, raf güncellenmeden devam et
+                }
+
+                try {
+                    int yeniRaf = Integer.parseInt(yeniRafStr);
+                    if (yeniRaf >= 100 && yeniRaf <= 999) {
+                        product.setRaf(yeniRafStr);
+                        break;
+                    } else {
+                        System.out.println("--Geçersiz raf numarası! Lütfen 100 ile 999 arasında bir sayı giriniz.--");
+                    }
+                } catch (NumberFormatException e) {
+                    System.out.println("--Geçersiz raf numarası! Lütfen sayısal bir değer giriniz.--");
+                }
             }
 
             System.out.println("--Ürün bilgileri başarıyla güncellendi.--");
@@ -193,6 +207,8 @@ public class ProductService {
 
         urunListele1(); // Güncellenmiş ürün listesini göster
     }
+
+
 
     //-----------------------Ürün Çıkışı------Yuşa H.-------------------------------------//
     public void urunCikisi() {
