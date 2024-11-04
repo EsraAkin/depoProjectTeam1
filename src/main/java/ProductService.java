@@ -27,9 +27,28 @@ public class ProductService {
 
     public void urunTanimlama() {
 
-        String urunIsmi = Utils.bosGecılma("Lütfen Ürünün İsmini Giriniz: ");
-        String uretici = Utils.bosGecılma("Lütfen Üretici İsmi Giriniz: ");
-        String birim = Utils.bosGecılma("Lütfen Ürün Birimini Giriniz: ");
+        String urunIsmi = Utils.bosGec("--Lütfen Ürünün İsmini Giriniz: ");
+        String uretici = Utils.bosGec("--Lütfen Üretici İsmi Giriniz: ");
+
+
+
+
+//        System.out.println("--Lütfen Ürünün İsmini Giriniz:");
+//        urunIsmi = input.nextLine();
+
+//        if (Utils.isEmpty(urunIsmi)) {
+//            System.out.println("Uyarı:Bu alan boş bırakılamaz!");
+//            urunTanimlama();
+//        }
+
+//        System.out.println("Lütfen Üretici İsmi Giriniz:");
+//        uretici = input.nextLine();
+
+//        if (Utils.isEmpty(uretici)) {
+//            System.out.println("Uyarı:Bu alan boş bırakılamaz!");
+//            urunTanimlama();
+//        }
+
 
         boolean urunBulunduMu = false;
 
@@ -44,10 +63,13 @@ public class ProductService {
             }
         }
 
-        if (!urunBulunduMu&&Utils.isEmpty(urunIsmi)) {
+        if (!urunBulunduMu) {
+
+
+            String birim = Utils.bosGec("Lütfen Ürün Birimini Giriniz: ");
 
             mevcutUrunler.put(idCounter, new Product(idCounter, urunIsmi, uretici, miktar, birim));
-            System.out.println("Ürün Başarıyla Eklendi. ");
+            System.out.println("--Ürün Başarıyla Tanimlandi.-- \u2705");
             idCounter++;
 
         }
@@ -64,24 +86,24 @@ public class ProductService {
             return; // Depoda ürün yoksa ana menüye dön
         }
 
-        int id = utils.intGirisAl("İşlem yapmak istediğiniz ürünün id numarasını giriniz: ");
+        int id = utils.intGirisAl("--İşlem yapmak istediğiniz ürünün id numarasını giriniz: ");
 
         if (mevcutUrunler.containsKey(id)) {
             Product product = mevcutUrunler.get(id);
-            System.out.println("Eklemek istediğiniz miktarı giriniz : ");
+            System.out.println("--Eklemek istediğiniz miktarı giriniz: ");
 
             int eklenecekMiktar = utils.intGirisAl("");
 
             //  int eklenacekMiktar = input.nextInt();
             if (eklenecekMiktar <= 0) {
-                System.out.println("Eklemek istediğiniz miktar sıfır ve negatif bir sayı olamaz. Lütfen tam sayı giriniz :");
+                System.out.println("Eklemek istediğiniz miktar sıfır ve negatif bir sayı olamaz. Lütfen tam sayı giriniz: ");
             } else {
                 //Miktar güncelle
                 product.setMiktar(product.getMiktar() + eklenecekMiktar);
-                System.out.println("Güncel ürün miktarı : " + product.getMiktar());
+                System.out.println("Güncel ürün miktarı: " + product.getMiktar());
             }
         } else {
-            System.out.println("Geçersiz ürün id'si.");
+            System.out.println("--Geçersiz ürün id'si.--");
         }
 
         urunListele1();
@@ -164,9 +186,9 @@ public class ProductService {
                 product.setRaf(yeniRaf);
             }
 
-            System.out.println("Ürün bilgileri başarıyla güncellendi.");
+            System.out.println("--Ürün bilgileri başarıyla güncellendi.--");
         } else {
-            System.out.println("Bu ID numarası ile bir ürün bulunamadı.");
+            System.out.println("--Bu ID numarası ile bir ürün bulunamadı.--");
         }
 
         urunListele1(); // Güncellenmiş ürün listesini göster
@@ -182,7 +204,7 @@ public class ProductService {
         if (mevcutUrunler.containsKey(id)) {  //Ürün varsa miktar kontrolü yapalım.
             System.out.println(id + " id numaralı " + mevcutUrunler.get(id).getUrunIsmi() + " " + mevcutUrunler.get(id).getMiktar() + " " + mevcutUrunler.get(id).getBirim() + " mevcuttur.");
 
-            System.out.println(" Çıkış yapmak istediğiniz miktarı yazınız.");
+            System.out.println(" Çıkış yapmak istediğiniz miktarı yazınız:");
             //  int cikisMiktari = input.nextInt();
             int cikisMiktari = utils.intGirisAl("");
             Product product = mevcutUrunler.get(id); // ID'ye göre ürünü alıyoruz
@@ -233,16 +255,16 @@ public class ProductService {
                         product.setRaf(yeniRafStr);
                         System.out.println("Ürün başarıyla " + yeniRaf + " nolu rafa yerleştirildi.");
                     } else {
-                        System.out.println("Bu raf numarası başka bir ürün tarafından kullanılmaktadır.");
+                        System.out.println("--Bu raf numarası başka bir ürün tarafından kullanılmaktadır.--");
                     }
                 } else {
-                    System.out.println("Geçersiz raf numarası! Lütfen 100 ile 999 arasında bir sayı giriniz.");
+                    System.out.println("--Geçersiz raf numarası! Lütfen 100 ile 999 arasında bir sayı giriniz.--");
                 }
             } catch (NumberFormatException e) {
-                System.out.println("Geçersiz raf numarası! Lütfen sayısal bir değer giriniz.");
+                System.out.println("--Geçersiz raf numarası! Lütfen sayısal bir değer giriniz.--");
             }
         } else {
-            System.out.println("Geçersiz ürün ID'si. Lütfen geçerli bir ID giriniz.");
+            System.out.println("--Geçersiz ürün ID'si. Lütfen geçerli bir ID giriniz.--");
         }
 
         urunListele1(); // Güncel listeyi göster
@@ -271,7 +293,7 @@ public class ProductService {
             input.nextLine();
 
             if (secim == 0) {
-                System.out.println("Ana menüye donuluyor...");
+                System.out.println("--Ana menüye donuluyor...--");
                 devam = false;
                 continue;
             }
