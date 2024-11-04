@@ -22,6 +22,7 @@ public class Utils {
         }
     }
 
+    //--------------------Map List boş mu kontrolü------------------------------
     public class Utils1 {
         public static boolean urunKontrol(Map<Integer, Product> mevcutUrunler) {
             if (mevcutUrunler.isEmpty()) {
@@ -31,6 +32,9 @@ public class Utils {
             return true; // Depoda ürün varsa true döner
         }
     }
+    
+    
+    //--------------------Listi formatlı yazdır ----------------------------------
     public static String capitalize(String inputString) {
 
         if (inputString == null || inputString.isEmpty()) {
@@ -47,17 +51,7 @@ public class Utils {
                 product.getMiktar(), product.getBirim(), product.getRaf());
     }
 
-//    public static boolean bosGecilemez(String str){
-//        if(str==null){
-//            System.out.println("Bu alan boş geçilemez! ");
-//        }
-//        return false;
-//    }
-
-
-
-
-    // Boş girdi kontrolü
+    // ------------------Boş girdi kontrolü---------------------------------
     public static boolean isEmpty(String input) {
         return input == null || input.trim().isEmpty();
 
@@ -75,7 +69,32 @@ public class Utils {
         return kullaniciGirisi;
     }
 
+    //--------------------------Alınacak inti belli aralıkta isteme-----------------------------------
+    public static Integer intAralikKontrolu(String inputMesaji, int min, int max) {
+        //kullanıcıdan belirli bir aralıkta bir tam sayı isteyip geçerli bir sayı alana kadar döngüye girilir.
+        Scanner scanner = new Scanner(System.in);
+        Integer deger = null;
 
+        while (deger == null) {
+            System.out.print(inputMesaji);
+            String input = scanner.nextLine().trim();
 
+            if (input.isEmpty()) {
+                return null; // Kullanıcı boş bırakırsa null döner (güncelleme yapılmaz)
+            }
+
+            try {
+                int girilenDeger = Integer.parseInt(input);
+                if (girilenDeger >= min && girilenDeger <= max) {
+                    deger = girilenDeger;
+                } else {
+                    System.out.println("--Geçersiz giriş! Lütfen " + min + " ile " + max + " arasında bir değer giriniz.--");
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("--Geçersiz giriş! Lütfen sayısal bir değer giriniz.--");
+            }
+        }
+        return deger;
+    }
 
 }
