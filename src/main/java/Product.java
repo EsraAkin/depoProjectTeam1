@@ -1,4 +1,4 @@
- public class Product {
+public class Product {
 
     private Integer idCounter;
     private String urunIsmi;
@@ -7,13 +7,13 @@
     private String birim;
     private String raf;
 
-    public Product(Integer idCounter, String urunIsmi, String uretici, int miktar, String birim, String raf) {
+    public Product(Integer idCounter, String urunIsmi, String uretici, int miktar, String birim) {
         this.idCounter = idCounter;
         this.urunIsmi = urunIsmi;
         this.uretici = uretici;
         this.miktar = 0;
         this.birim = birim;
-        this.raf = "null";
+
     }
 
 
@@ -67,8 +67,6 @@
         this.raf = raf;
     }
 
-    public String toString() {
-        return String.format("%-20s | %-20s | %-20s | %-10s | %-10s | %-10s",
-                idCounter, urunIsmi, uretici, miktar, birim, raf);
-    }
+
+
 }
