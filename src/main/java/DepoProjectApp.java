@@ -32,7 +32,7 @@ public class DepoProjectApp {
 
             //Kullanıcı int yerine string girerse exeption kontrolü yapıyotuz.
 
-            secim = utils.intGirisAl("");
+            secim = utils.intGirisAl("Lütfen yapmak istediğiniz işlemi seçiniz: ");
 
             switch (secim) {
                 case 1:
@@ -63,9 +63,9 @@ public class DepoProjectApp {
 
                 default:
                     if (secim != -1) {
-                        System.out.println("--Hatalı giriş! Lütfen menüden bir tamsayı değer giriniz: ");
+                        System.out.println("Hatalı giriş! Lütfen menüden bir tamsayı değer giriniz : ");
                     } else if (!(secim >= 0 && secim < 8)) {
-                        System.out.println("--Hatalı giriş! Lütfen menüden bir tamsayı değer giriniz: ");
+                        System.out.println("Hatalı giriş! Lütfen menüden bir tamsayı değer giriniz : ");
                     }
                     break;
             }
