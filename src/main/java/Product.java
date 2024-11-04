@@ -1,4 +1,4 @@
-public class Product {
+ public class Product {
 
     private Integer idCounter;
     private String urunIsmi;
