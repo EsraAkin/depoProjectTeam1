@@ -99,15 +99,13 @@ public class ProductService {
         for (Map.Entry<Integer, Product> entry : mevUrunList) {
             Product product = entry.getValue();
 
-
-            Product value = entry.getValue();
             System.out.printf("%-20s | %-20s | %-20s | %-10s | %-10s | %-10s%n",
                     Utils.capitalize(product.getIdCounter().toString()),
-                    Utils.capitalize(value.getUrunIsmi()),
-                    Utils.capitalize(value.getUretici()),
-                    Utils.capitalize(((Integer) (value.getMiktar())).toString()),
-                    Utils.capitalize(value.getBirim()),
-                    Utils.capitalize(value.getRaf()));
+                    Utils.capitalize(product.getUrunIsmi()),
+                    Utils.capitalize(product.getUretici()),
+                    Utils.capitalize(((Integer) (product.getMiktar())).toString()),
+                    Utils.capitalize(product.getBirim()),
+                    Utils.capitalize(product.getRaf()));
 
         }
     }
