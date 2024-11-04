@@ -55,6 +55,8 @@ public class Utils {
 //    }
 
 
+
+
     // Boş girdi kontrolü
     public static boolean isEmpty(String input) {
         return input == null || input.trim().isEmpty();

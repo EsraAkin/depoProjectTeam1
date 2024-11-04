@@ -32,6 +32,7 @@ public class ProductService {
 
 
 
+
 //        System.out.println("--Lütfen Ürünün İsmini Giriniz:");
 //        urunIsmi = input.nextLine();
 
@@ -64,7 +65,9 @@ public class ProductService {
 
         if (!urunBulunduMu) {
 
+
             String birim = Utils.bosGec("Lütfen Ürün Birimini Giriniz: ");
+
             mevcutUrunler.put(idCounter, new Product(idCounter, urunIsmi, uretici, miktar, birim));
             System.out.println("--Ürün Başarıyla Tanimlandi.-- \u2705");
             idCounter++;
