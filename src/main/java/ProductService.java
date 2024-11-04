@@ -7,14 +7,10 @@
 //GÜNCELLEME       --Esra H.
 //ARAMA            --Alper H. Lambda ile ürüne-üreticiye-kalan miktara göre arama yapılacak...
 
-
-import jdk.jshell.execution.Util;
-
 import java.util.*;
 import java.util.stream.Stream;
 
 public class ProductService {
-
 
     Scanner input = new Scanner(System.in);
     String urunIsmi;
@@ -31,25 +27,6 @@ public class ProductService {
 
         String urunIsmi = Utils.bosGec("--Lütfen Ürünün İsmini Giriniz: ");
         String uretici = Utils.bosGec("--Lütfen Üretici İsmi Giriniz: ");
-
-
-
-
-//        System.out.println("--Lütfen Ürünün İsmini Giriniz:");
-//        urunIsmi = input.nextLine();
-
-//        if (Utils.isEmpty(urunIsmi)) {
-//            System.out.println("Uyarı:Bu alan boş bırakılamaz!");
-//            urunTanimlama();
-//        }
-
-//        System.out.println("Lütfen Üretici İsmi Giriniz:");
-//        uretici = input.nextLine();
-
-//        if (Utils.isEmpty(uretici)) {
-//            System.out.println("Uyarı:Bu alan boş bırakılamaz!");
-//            urunTanimlama();
-//        }
 
 
         boolean urunBulunduMu = false;
@@ -180,25 +157,11 @@ public class ProductService {
             }
 
             System.out.println("Mevcut Raf: " + product.getRaf());
-            while (true) {
-                System.out.print("Yeni Raf (güncellenmeyecekse boş bırakın, 100 ile 999 arasında olmalı): ");
-                String yeniRafStr = input.nextLine().trim();
-                if (yeniRafStr.isEmpty()) {
-                    break; // Boş bırakılırsa, raf güncellenmeden devam et
-                }
-
-                try {
-                    int yeniRaf = Integer.parseInt(yeniRafStr);
-                    if (yeniRaf >= 100 && yeniRaf <= 999) {
-                        product.setRaf(yeniRafStr);
-                        break;
-                    } else {
-                        System.out.println("--Geçersiz raf numarası! Lütfen 100 ile 999 arasında bir sayı giriniz.--");
-                    }
-                } catch (NumberFormatException e) {
-                    System.out.println("--Geçersiz raf numarası! Lütfen sayısal bir değer giriniz.--");
-                }
+            Integer yeniRaf = Utils.intAralikKontrolu("Yeni Raf (güncellenmeyecekse boş bırakın, 100 ile 999 arasında olmalı): ", 100, 999);
+            if (yeniRaf != null) {
+                product.setRaf(yeniRaf.toString());
             }
+
 
             System.out.println("--Ürün bilgileri başarıyla güncellendi.--");
         } else {
