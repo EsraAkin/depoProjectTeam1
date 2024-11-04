@@ -16,7 +16,7 @@ public class Utils {
                 input.nextLine(); // Buffer temizliği
                 return sayi; // Başarılı giriş yapılmışsa döndür
             } catch (InputMismatchException e) {
-                System.out.println("Hatalı giriş! Lütfen bir tam sayı giriniz.");
+                System.out.println("--Hatalı giriş! Lütfen bir tam sayı giriniz.--");
                 input.nextLine(); // Hatalı girdiyi temizle
             }
         }
@@ -25,7 +25,7 @@ public class Utils {
     public class Utils1 {
         public static boolean urunKontrol(Map<Integer, Product> mevcutUrunler) {
             if (mevcutUrunler.isEmpty()) {
-                System.out.println("Depoda henüz tanımlanmış bir ürün yok! Lütfen önce bir ürün tanımlayın.");
+                System.out.println("--Depoda henüz tanımlanmış bir ürün yok! Lütfen önce bir ürün tanımlayın.--");
                 return false; // Depoda ürün yoksa false döner
             }
             return true; // Depoda ürün varsa true döner
@@ -60,14 +60,14 @@ public class Utils {
         return input == null || input.trim().isEmpty();
 
     }
-    public static String bosGecılma(String mesaj) {
+    public static String bosGec(String mesaj) {
         Scanner input = new Scanner(System.in);
         String kullaniciGirisi = "";
         while (kullaniciGirisi.isEmpty()) {
             System.out.print(mesaj);
             kullaniciGirisi = input.nextLine().trim();
             if (kullaniciGirisi.isEmpty()) {
-                System.out.println("Hata: Bu alan boş olamaz. Lütfen geçerli bir giriş yapınız.");
+                System.out.println("--Hata: Bu alan boş olamaz. Lütfen geçerli bir giriş yapınız.--");
             }
         }
         return kullaniciGirisi;
