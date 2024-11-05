@@ -7,18 +7,16 @@
 //GÜNCELLEME       --Esra H.
 //ARAMA            --Alper H. Lambda ile ürüne-üreticiye-kalan miktara göre arama yapılacak...
 
+
 import java.util.*;
 import java.util.stream.Stream;
 
 public class ProductService {
 
+
     Scanner input = new Scanner(System.in);
-    String urunIsmi;
-    String uretici;
-    String birim;
-    String raf;
     Integer idCounter = 1000;
-    int miktar = 0;
+
     Map<Integer, Product> mevcutUrunler = new HashMap<>();
 
     //----------------------------ÜRÜN TANIMLAMA   --Ertuğrul H.----------------------------//
@@ -44,10 +42,9 @@ public class ProductService {
 
         if (!urunBulunduMu) {
 
+            String birim = Utils.bosGec("--Lütfen Ürün Birimini Giriniz: ");
 
-            String birim = Utils.bosGec("Lütfen Ürün Birimini Giriniz: ");
-
-            mevcutUrunler.put(idCounter, new Product(idCounter, urunIsmi, uretici, miktar, birim));
+            mevcutUrunler.put(idCounter, new Product(idCounter, urunIsmi, uretici, birim));
             System.out.println("--Ürün Başarıyla Tanimlandi.-- \u2705");
             idCounter++;
 
@@ -55,8 +52,7 @@ public class ProductService {
         urunListele1();
     }
 
-
-    //----------------------------ÜRÜN GİRİŞİ   --Hatice H.----------------------------//
+    //----------------------------ÜRÜN GİRİŞİ   --Hatice H.---------------------------------//
 
     public void urunGirisi() {
 
@@ -88,7 +84,7 @@ public class ProductService {
         urunListele1();
     }
 
-    //----------------------------ÜRÜN LİSTELE   --Ahsen H.----------------------------//
+    //----------------------------ÜRÜN LİSTELE   --Ahsen H.---------------------------------//
 
     public void urunListele1() {
 
@@ -99,20 +95,101 @@ public class ProductService {
         for (Map.Entry<Integer, Product> entry : mevUrunList) {
             Product product = entry.getValue();
 
+
+            Product value = entry.getValue();
             System.out.printf("%-20s | %-20s | %-20s | %-10s | %-10s | %-10s%n",
                     Utils.capitalize(product.getIdCounter().toString()),
-                    Utils.capitalize(product.getUrunIsmi()),
-                    Utils.capitalize(product.getUretici()),
-                    Utils.capitalize(((Integer) (product.getMiktar())).toString()),
-                    Utils.capitalize(product.getBirim()),
-                    Utils.capitalize(product.getRaf()));
+                    Utils.capitalize(value.getUrunIsmi()),
+                    Utils.capitalize(value.getUretici()),
+                    Utils.capitalize(((Integer) (value.getMiktar())).toString()),
+                    Utils.capitalize(value.getBirim()),
+                    Utils.capitalize(value.getRaf()));
 
         }
     }
 
-    //----------------------------ÜRÜN GÜNCELLE   --Esra H.----------------------------//
+    //----------------------------ÜRÜN RAFA KOYMA   --Kerim H.-------------------------------//
+
+    public void urunRafakoyma() {
+        Utils utils = new Utils();
+
+        if (!Utils.Utils1.urunKontrol(mevcutUrunler)) return; // Depoda ürün yoksa ana menüye dön
+
+        int id = utils.intGirisAl("İşlem yapmak istediğiniz ürünün id numarasını giriniz: ");
+
+        if (mevcutUrunler.containsKey(id)) {
+            Product product = mevcutUrunler.get(id);
+
+            if (product.getRaf() != null && !product.getRaf().isEmpty()) {
+                System.out.println("Ürünün zaten bir raf numarası var: " + product.getRaf());
+                return;
+            }
+
+            System.out.println("Lütfen raf numarasını giriniz (100 ile 999 arasında): ");
+
+            // Eğer burada sayı alacaksanız, buffer temizliğini sağlayın
+            String yeniRafStr = input.nextLine().trim(); // nextInt'ten sonra kullanıyorsanız buffer temizliği önemli
+
+            try {
+                int yeniRaf = Integer.parseInt(yeniRafStr);
+
+                if (yeniRaf >= 100 && yeniRaf <= 999) {
+                    boolean rafDolu = mevcutUrunler.values().stream()
+                            .anyMatch(p -> yeniRafStr.equals(p.getRaf()));
+
+                    if (!rafDolu) {
+                        product.setRaf(yeniRafStr);
+                        System.out.println("Ürün başarıyla " + yeniRaf + " nolu rafa yerleştirildi.");
+                    } else {
+                        System.out.println("--Bu raf numarası başka bir ürün tarafından kullanılmaktadır.--");
+                    }
+                } else {
+                    System.out.println("--Geçersiz raf numarası! Lütfen 100 ile 999 arasında bir sayı giriniz.--");
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("--Geçersiz raf numarası! Lütfen sayısal bir değer giriniz.--");
+            }
+        } else {
+            System.out.println("--Geçersiz ürün ID'si. Lütfen geçerli bir ID giriniz.--");
+        }
+
+        urunListele1(); // Güncel listeyi göster
+    }
+
+    //----------------------------ÜRÜN ÇIKIŞI ------Yuşa H.----------------------------------//
+
+    public void urunCikisi() {
+
+        Utils utils = new Utils();
+        if (!Utils.Utils1.urunKontrol(mevcutUrunler)) return; // Depoda ürün yoksa ana menüye dön
+        int id = utils.intGirisAl("İşlem yapmak istediğiniz ürünün id numarasını giriniz: ");
+
+        if (mevcutUrunler.containsKey(id)) {  //Ürün varsa miktar kontrolü yapalım.
+            System.out.println(id + " id numaralı " + mevcutUrunler.get(id).getUrunIsmi() + " " + mevcutUrunler.get(id).getMiktar() + " " + mevcutUrunler.get(id).getBirim() + " mevcuttur.");
+
+            System.out.println(" Çıkış yapmak istediğiniz miktarı yazınız:");
+            //  int cikisMiktari = input.nextInt();
+            int cikisMiktari = utils.intGirisAl("");
+            Product product = mevcutUrunler.get(id); // ID'ye göre ürünü alıyoruz
+            if (cikisMiktari < 0) {
+                System.out.println("Hata: Çıkış miktarı negatif olamaz!");
+            } else if (mevcutUrunler.get(id).getMiktar() >= cikisMiktari) {
+                product.setMiktar(product.getMiktar() - cikisMiktari); // Çıkış işlemi yapılıyor
+                System.out.println("Çıkış işlemi başarıyla gerçekleştirildi.");
+            } else {
+                System.out.println("Hata: Çıkış miktarı mevcut miktardan fazla olamaz!");
+            }
+
+        } else {
+            System.out.println("Bu id numarası ile ürün bulunamadı.");
+        }
+        urunListele1();
+    }
+
+    //----------------------------ÜRÜN GÜNCELLE   --Esra H.----------------------------------//
+
     public void urunuGuncelle() {
-        Utils utils=new Utils();
+        Utils utils = new Utils();
         if (!Utils.Utils1.urunKontrol(mevcutUrunler)) return; // Depoda ürün yoksa ana menüye dön
         int id = utils.intGirisAl("İşlem yapmak istediğiniz ürünün id numarasını giriniz: ");
 
@@ -169,87 +246,7 @@ public class ProductService {
         urunListele1(); // Güncellenmiş ürün listesini göster
     }
 
-
-
-    //-----------------------Ürün Çıkışı------Yuşa H.-------------------------------------//
-    public void urunCikisi() {
-
-        Utils utils = new Utils();
-        if (!Utils.Utils1.urunKontrol(mevcutUrunler)) return; // Depoda ürün yoksa ana menüye dön
-        int id = utils.intGirisAl("İşlem yapmak istediğiniz ürünün id numarasını giriniz: ");
-
-        if (mevcutUrunler.containsKey(id)) {  //Ürün varsa miktar kontrolü yapalım.
-            System.out.println(id + " id numaralı " + mevcutUrunler.get(id).getUrunIsmi() + " " + mevcutUrunler.get(id).getMiktar() + " " + mevcutUrunler.get(id).getBirim() + " mevcuttur.");
-
-            System.out.println(" Çıkış yapmak istediğiniz miktarı yazınız:");
-            //  int cikisMiktari = input.nextInt();
-            int cikisMiktari = utils.intGirisAl("");
-            Product product = mevcutUrunler.get(id); // ID'ye göre ürünü alıyoruz
-            if (cikisMiktari < 0) {
-                System.out.println("Hata: Çıkış miktarı negatif olamaz!");
-            } else if (mevcutUrunler.get(id).getMiktar() >= cikisMiktari) {
-                product.setMiktar(product.getMiktar() - cikisMiktari); // Çıkış işlemi yapılıyor
-                System.out.println("Çıkış işlemi başarıyla gerçekleştirildi.");
-            } else {
-                System.out.println("Hata: Çıkış miktarı mevcut miktardan fazla olamaz!");
-            }
-
-        } else {
-            System.out.println("Bu id numarası ile ürün bulunamadı.");
-        }
-        urunListele1();
-    }
-
-    //----------------------------ÜRÜN RAFA KOYMA   --Kerim H.----------------------------//
-    public void urunRafakoyma() {
-        Utils utils = new Utils();
-
-        if (!Utils.Utils1.urunKontrol(mevcutUrunler)) return; // Depoda ürün yoksa ana menüye dön
-
-        int id = utils.intGirisAl("İşlem yapmak istediğiniz ürünün id numarasını giriniz: ");
-
-        if (mevcutUrunler.containsKey(id)) {
-            Product product = mevcutUrunler.get(id);
-
-            if (product.getRaf() != null && !product.getRaf().isEmpty()) {
-                System.out.println("Ürünün zaten bir raf numarası var: " + product.getRaf());
-                return;
-            }
-
-            System.out.println("Lütfen raf numarasını giriniz (100 ile 999 arasında): ");
-
-            // Eğer burada sayı alacaksanız, buffer temizliğini sağlayın
-            String yeniRafStr = input.nextLine().trim(); // nextInt'ten sonra kullanıyorsanız buffer temizliği önemli
-
-            try {
-                int yeniRaf = Integer.parseInt(yeniRafStr);
-
-                if (yeniRaf >= 100 && yeniRaf <= 999) {
-                    boolean rafDolu = mevcutUrunler.values().stream()
-                            .anyMatch(p -> yeniRafStr.equals(p.getRaf()));
-
-                    if (!rafDolu) {
-                        product.setRaf(yeniRafStr);
-                        System.out.println("Ürün başarıyla " + yeniRaf + " nolu rafa yerleştirildi.");
-                    } else {
-                        System.out.println("--Bu raf numarası başka bir ürün tarafından kullanılmaktadır.--");
-                    }
-                } else {
-                    System.out.println("--Geçersiz raf numarası! Lütfen 100 ile 999 arasında bir sayı giriniz.--");
-                }
-            } catch (NumberFormatException e) {
-                System.out.println("--Geçersiz raf numarası! Lütfen sayısal bir değer giriniz.--");
-            }
-        } else {
-            System.out.println("--Geçersiz ürün ID'si. Lütfen geçerli bir ID giriniz.--");
-        }
-
-        urunListele1(); // Güncel listeyi göster
-    }
-
-
-    //----------------------------ÜRÜN ARAMA   --Alper H.----------------------------//
-
+    //----------------------------ÜRÜN ARAMA   --Alper H.------------------------------------//
 
     public void urunArama() {
 
