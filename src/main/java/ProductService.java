@@ -42,6 +42,7 @@ public class ProductService {
 
         if (!urunBulunduMu) {
 
+
             String birim = Utils.bosGec("--Lütfen Ürün Birimini Giriniz: ");
 
             mevcutUrunler.put(idCounter, new Product(idCounter, urunIsmi, uretici, birim));
@@ -49,7 +50,7 @@ public class ProductService {
             idCounter++;
 
         }
-        urunListele1();
+        urunListele();
     }
 
     //----------------------------ÜRÜN GİRİŞİ   --Hatice H.---------------------------------//
@@ -81,12 +82,12 @@ public class ProductService {
             System.out.println("--Geçersiz ürün id'si.--");
         }
 
-        urunListele1();
+        urunListele();
     }
 
     //----------------------------ÜRÜN LİSTELE   --Ahsen H.---------------------------------//
 
-    public void urunListele1() {
+    public void urunListele() {
 
         System.out.printf("%-20s | %-20s | %-20s | %-10s | %-10s | %-10s%n",
                 "Urun Numarasi", "Urun Ismi", "Uretici Ismi", "Miktar", "Birim", "Raf");
@@ -153,7 +154,7 @@ public class ProductService {
             System.out.println("--Geçersiz ürün ID'si. Lütfen geçerli bir ID giriniz.--");
         }
 
-        urunListele1(); // Güncel listeyi göster
+        urunListele(); // Güncel listeyi göster
     }
 
     //----------------------------ÜRÜN ÇIKIŞI ------Yuşa H.----------------------------------//
@@ -183,7 +184,7 @@ public class ProductService {
         } else {
             System.out.println("Bu id numarası ile ürün bulunamadı.");
         }
-        urunListele1();
+        urunListele();
     }
 
     //----------------------------ÜRÜN GÜNCELLE   --Esra H.----------------------------------//
@@ -243,7 +244,7 @@ public class ProductService {
             System.out.println("--Bu ID numarası ile bir ürün bulunamadı.--");
         }
 
-        urunListele1(); // Güncellenmiş ürün listesini göster
+        urunListele(); // Güncellenmiş ürün listesini göster
     }
 
     //----------------------------ÜRÜN ARAMA   --Alper H.------------------------------------//
