@@ -7,7 +7,7 @@ public class Product {
     private String birim;
     private String raf;
 
-    public Product(Integer idCounter, String urunIsmi, String uretici, int miktar, String birim) {
+    public Product(Integer idCounter, String urunIsmi, String uretici, String birim) {
         this.idCounter = idCounter;
         this.urunIsmi = urunIsmi;
         this.uretici = uretici;
@@ -66,6 +66,5 @@ public class Product {
     public void setRaf(String raf) {
         this.raf = raf;
     }
-
 
 }
