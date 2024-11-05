@@ -40,7 +40,7 @@ public class DepoProjectApp {
 
                     break;
                 case 2:
-                    productService.urunListele1();
+                    productService.urunListele();
                     break;
                 case 3:
                     productService.urunGirisi();
