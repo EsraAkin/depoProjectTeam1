@@ -4,20 +4,19 @@ import java.util.Scanner;
 
 public class Utils {
 
-    //---------------------------int yerine string exception metodu----------------------
+    //---------------------------int yerine string girilmesi durumunda exception metodu----------------------
     public int intGirisAl(String mesaj) {
-        Scanner input = new Scanner(System.in);
+        Scanner input = new Scanner(System.in); // Her çağrıda yeni Scanner başlat
         int sayi;
 
         while (true) {
             System.out.print(mesaj);
             try {
-                sayi = input.nextInt();
-                input.nextLine(); // Buffer temizliği
-                return sayi; // Başarılı giriş yapılmışsa döndür
-            } catch (InputMismatchException e) {
-                System.out.println("--Hatalı giriş! Lütfen bir tam sayı giriniz.--");
-                input.nextLine(); // Hatalı girdiyi temizle
+                String girdi = input.nextLine(); // nextLine ile tam girdi al
+                sayi = Integer.parseInt(girdi); // Tam sayıya dönüştür
+                return sayi;
+            } catch (NumberFormatException e) {
+                System.out.println("--Hatalı giriş! Lütfen geçerli bir değer giriniz.--");
             }
         }
     }
@@ -32,8 +31,7 @@ public class Utils {
             return true; // Depoda ürün varsa true döner
         }
     }
-    
-    
+
     //--------------------Listi formatlı yazdır ----------------------------------
     public static String capitalize(String inputString) {
 
@@ -56,6 +54,7 @@ public class Utils {
         return input == null || input.trim().isEmpty();
 
     }
+
     public static String bosGec(String mesaj) {
         Scanner input = new Scanner(System.in);
         String kullaniciGirisi = "";
