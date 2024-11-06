@@ -1,4 +1,4 @@
-import java.util.InputMismatchException;
+
 import java.util.Map;
 import java.util.Scanner;
 
@@ -47,6 +47,27 @@ public class Utils {
         return String.format("%-20s | %-20s | %-20s | %-10s | %-10s | %-10s",
                 product.getIdCounter(), product.getUrunIsmi(), product.getUretici(),
                 product.getMiktar(), product.getBirim(), product.getRaf());
+    }
+
+    //--------------------gecerli id giriş kontrolü------------------
+
+    public static int gecerliUrunIdAl(Map<Integer, Product> mevcutUrunler, String mesaj) {
+        Scanner input = new Scanner(System.in);
+        int id;
+
+        while (true) {
+            System.out.print(mesaj);
+            try {
+                id = Integer.parseInt(input.nextLine().trim());
+                if (mevcutUrunler.containsKey(id)) {
+                    return id; // Geçerli bir id girildiyse döndür
+                } else {
+                    System.out.println("--Geçersiz ürün id'si. Lütfen geçerli bir id giriniz.--");
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("--Hatalı giriş! Lütfen bir tam sayı giriniz.--");
+            }
+        }
     }
 
     // ------------------Boş girdi kontrolü---------------------------------
