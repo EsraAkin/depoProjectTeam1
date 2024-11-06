@@ -62,7 +62,8 @@ public class ProductService {
             return; // Depoda ürün yoksa ana menüye dön
         }
 
-        int id = utils.intGirisAl("--İşlem yapmak istediğiniz ürünün id numarasını giriniz: ");
+        int id = Utils.gecerliUrunIdAl(mevcutUrunler, "--İşlem yapmak istediğiniz ürünün id numarasını giriniz: ");
+
 
         if (mevcutUrunler.containsKey(id)) {
             Product product = mevcutUrunler.get(id);
@@ -116,7 +117,7 @@ public class ProductService {
 
         if (!Utils.Utils1.urunKontrol(mevcutUrunler)) return; // Depoda ürün yoksa ana menüye dön
 
-        int id = utils.intGirisAl("İşlem yapmak istediğiniz ürünün id numarasını giriniz: ");
+        int id = Utils.gecerliUrunIdAl(mevcutUrunler, "--İşlem yapmak istediğiniz ürünün id numarasını giriniz: ");
 
         if (mevcutUrunler.containsKey(id)) {
             Product product = mevcutUrunler.get(id);
@@ -163,7 +164,7 @@ public class ProductService {
 
         Utils utils = new Utils();
         if (!Utils.Utils1.urunKontrol(mevcutUrunler)) return; // Depoda ürün yoksa ana menüye dön
-        int id = utils.intGirisAl("İşlem yapmak istediğiniz ürünün id numarasını giriniz: ");
+        int id = Utils.gecerliUrunIdAl(mevcutUrunler, "--İşlem yapmak istediğiniz ürünün id numarasını giriniz: ");
 
         if (mevcutUrunler.containsKey(id)) {  //Ürün varsa miktar kontrolü yapalım.
             System.out.println(id + " id numaralı " + mevcutUrunler.get(id).getUrunIsmi() + " " + mevcutUrunler.get(id).getMiktar() + " " + mevcutUrunler.get(id).getBirim() + " mevcuttur.");
@@ -192,7 +193,7 @@ public class ProductService {
     public void urunuGuncelle() {
         Utils utils = new Utils();
         if (!Utils.Utils1.urunKontrol(mevcutUrunler)) return; // Depoda ürün yoksa ana menüye dön
-        int id = utils.intGirisAl("İşlem yapmak istediğiniz ürünün id numarasını giriniz: ");
+        int id = Utils.gecerliUrunIdAl(mevcutUrunler, "--İşlem yapmak istediğiniz ürünün id numarasını giriniz: ");
 
         if (mevcutUrunler.containsKey(id)) {
             Product product = mevcutUrunler.get(id);
@@ -242,6 +243,7 @@ public class ProductService {
             System.out.println("--Ürün bilgileri başarıyla güncellendi.--");
         } else {
             System.out.println("--Bu ID numarası ile bir ürün bulunamadı.--");
+
         }
 
         urunListele(); // Güncellenmiş ürün listesini göster
