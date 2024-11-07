@@ -321,7 +321,7 @@ public class ProductService {
                     System.out.println("--Lutfen Aranacak Raf Numarasini Giriniz--");
                     String aranacakRaf = input.nextLine();
                     aranan = mevcutUrunler.values().stream()
-                            .filter(t -> t.getRaf().equalsIgnoreCase(aranacakRaf));
+                            .filter(t -> t.getRaf() != null && t.getRaf().equalsIgnoreCase(aranacakRaf));
                     break;
                 default:
                     System.out.println("--Gecersiz bir secim yaptiniz. Lutfen 0 ile 4 arasinda bir sayi giriniz.--");
