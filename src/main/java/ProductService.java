@@ -56,32 +56,20 @@ public class ProductService {
     //----------------------------ÜRÜN GİRİŞİ   --Hatice H.---------------------------------//
 
     public void urunGirisi() {
-
         Utils utils = new Utils();
         if (!Utils.Utils1.urunKontrol(mevcutUrunler)) {
             return; // Depoda ürün yoksa ana menüye dön
         }
 
         int id = Utils.gecerliUrunIdAl(mevcutUrunler, "--İşlem yapmak istediğiniz ürünün id numarasını giriniz: ");
+        Product product = mevcutUrunler.get(id);
 
+        // Pozitif miktar alınana kadar miktar sorma işlemi Utils'teki metotta yapılacak
+        int eklenecekMiktar = Utils.gecerliPozitifMiktarAl("--Eklemek istediğiniz miktarı giriniz: ");
 
-        if (mevcutUrunler.containsKey(id)) {
-            Product product = mevcutUrunler.get(id);
-            System.out.println("--Eklemek istediğiniz miktarı giriniz: ");
-
-            int eklenecekMiktar = utils.intGirisAl("");
-
-            //  int eklenacekMiktar = input.nextInt();
-            if (eklenecekMiktar <= 0) {
-                System.out.println("Eklemek istediğiniz miktar sıfır ve negatif bir sayı olamaz. Lütfen pozitif tam sayı giriniz: ");
-            } else {
-                //Miktar güncelle
-                product.setMiktar(product.getMiktar() + eklenecekMiktar);
-                System.out.println("Güncel ürün miktarı: " + product.getMiktar());
-            }
-        } else {
-            System.out.println("--Geçersiz ürün id'si.--");
-        }
+        // Miktarı güncelle
+        product.setMiktar(product.getMiktar() + eklenecekMiktar);
+        System.out.println("Güncel ürün miktarı: " + product.getMiktar());
 
         urunListele();
     }
@@ -161,30 +149,25 @@ public class ProductService {
     //----------------------------ÜRÜN ÇIKIŞI ------Yuşa H.----------------------------------//
 
     public void urunCikisi() {
-
         Utils utils = new Utils();
         if (!Utils.Utils1.urunKontrol(mevcutUrunler)) return; // Depoda ürün yoksa ana menüye dön
+
         int id = Utils.gecerliUrunIdAl(mevcutUrunler, "--İşlem yapmak istediğiniz ürünün id numarasını giriniz: ");
+        Product product = mevcutUrunler.get(id);
 
-        if (mevcutUrunler.containsKey(id)) {  //Ürün varsa miktar kontrolü yapalım.
-            System.out.println(id + " id numaralı " + mevcutUrunler.get(id).getUrunIsmi() + " " + mevcutUrunler.get(id).getMiktar() + " " + mevcutUrunler.get(id).getBirim() + " mevcuttur.");
+        System.out.println(id + " id numaralı " + product.getUrunIsmi() + " " + product.getMiktar() + " " + product.getBirim() + " mevcuttur.");
 
-            System.out.println(" Çıkış yapmak istediğiniz miktarı yazınız:");
-            //  int cikisMiktari = input.nextInt();
-            int cikisMiktari = utils.intGirisAl("");
-            Product product = mevcutUrunler.get(id); // ID'ye göre ürünü alıyoruz
-            if (cikisMiktari < 0) {
-                System.out.println("Hata: Çıkış miktarı negatif olamaz!");
-            } else if (mevcutUrunler.get(id).getMiktar() >= cikisMiktari) {
-                product.setMiktar(product.getMiktar() - cikisMiktari); // Çıkış işlemi yapılıyor
-                System.out.println("Çıkış işlemi başarıyla gerçekleştirildi.");
-            } else {
-                System.out.println("Hata: Çıkış miktarı mevcut miktardan fazla olamaz!");
-            }
+        // Pozitif miktar alımı için Utils'teki metodu kullanıyoruz
+        int cikisMiktari = Utils.gecerliPozitifMiktarAl("Çıkış yapmak istediğiniz miktarı yazınız: ");
 
+        // Mevcut miktar kontrolü
+        if (product.getMiktar() >= cikisMiktari) {
+            product.setMiktar(product.getMiktar() - cikisMiktari); // Çıkış işlemi yapılıyor
+            System.out.println("Çıkış işlemi başarıyla gerçekleştirildi.");
         } else {
-            System.out.println("Bu id numarası ile ürün bulunamadı.");
+            System.out.println("Hata: Çıkış miktarı mevcut miktardan fazla olamaz!");
         }
+
         urunListele();
     }
 
