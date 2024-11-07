@@ -73,7 +73,7 @@ public class ProductService {
 
             //  int eklenacekMiktar = input.nextInt();
             if (eklenecekMiktar <= 0) {
-                System.out.println("Eklemek istediğiniz miktar sıfır ve negatif bir sayı olamaz. Lütfen tam sayı giriniz: ");
+                System.out.println("Eklemek istediğiniz miktar sıfır ve negatif bir sayı olamaz. Lütfen pozitif tam sayı giriniz: ");
             } else {
                 //Miktar güncelle
                 product.setMiktar(product.getMiktar() + eklenecekMiktar);
