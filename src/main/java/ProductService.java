@@ -34,7 +34,7 @@ public class ProductService {
             int id = entry.getKey();
 
             if (product.getUrunIsmi().equalsIgnoreCase(urunIsmi) && product.getUretici().equalsIgnoreCase(uretici)) {
-                System.out.println("Bu ürün " + id + " ile zaten mevcut.");
+                System.out.println("Bu ürün " + id + " numarası ile zaten mevcut.");
                 urunBulunduMu = true;
                 break;
             }
