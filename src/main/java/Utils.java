@@ -116,5 +116,24 @@ public class Utils {
         }
         return deger;
     }
+//-------------------gecerliPozitifMiktarAl--------------------------------
+    public static int gecerliPozitifMiktarAl(String mesaj) {
+        Scanner input = new Scanner(System.in);
+        int miktar;
+
+        while (true) {
+            System.out.print(mesaj);
+            try {
+                miktar = Integer.parseInt(input.nextLine().trim());
+                if (miktar > 0) {
+                    return miktar; // Pozitif miktar girildiyse döndür
+                } else {
+                    System.out.println("--Hatalı giriş! Lütfen pozitif bir tam sayı giriniz.--");
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("--Geçersiz giriş! Lütfen geçerli bir tam sayı giriniz.--");
+            }
+        }
+    }
 
 }
