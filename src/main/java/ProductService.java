@@ -273,15 +273,19 @@ public class ProductService {
                     aranan = mevcutUrunler.values().stream().filter(t -> t.getUretici().equalsIgnoreCase(aranacakUretici));
                     break;
                 case 3:
-                    System.out.println("--Lutfen Miktar Sinirini Giriniz--");
-                    int miktarUstSinir = input.nextInt();
-                    aranan = mevcutUrunler.values().stream().filter(t -> t.getMiktar() <= miktarUstSinir);
+                    System.out.println("--Lütfen Miktar Sınırını Giriniz--");
+                    try {
+                        int miktarUstSinir = Integer.parseInt(input.nextLine().trim());
+                        aranan = mevcutUrunler.values().stream().filter(t -> t.getMiktar() <= miktarUstSinir);
+                    } catch (NumberFormatException e) {
+                        System.out.println("--Geçersiz veya boş giriş! Lütfen sayısal bir değer giriniz.--");
+                    }
                     break;
                 case 4:
                     System.out.println("--Lutfen Aranacak Raf Numarasini Giriniz--");
                     String aranacakRaf = input.nextLine();
                     aranan = mevcutUrunler.values().stream()
-                            .filter(t -> t.getRaf().equalsIgnoreCase(aranacakRaf));
+                            .filter(t -> t.getRaf() != null && t.getRaf().equalsIgnoreCase(aranacakRaf));
                     break;
                 default:
                     System.out.println("--Gecersiz bir secim yaptiniz. Lutfen 0 ile 4 arasinda bir sayi giriniz.--");
