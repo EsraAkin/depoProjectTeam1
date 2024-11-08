@@ -34,7 +34,7 @@ public class ProductService {
             int id = entry.getKey();
 
             if (product.getUrunIsmi().equalsIgnoreCase(urunIsmi) && product.getUretici().equalsIgnoreCase(uretici)) {
-                System.out.println("Bu ürün " + id + " numarası ile zaten mevcut.");
+                System.out.println("Bu ürün " + id + " id numarası ile zaten mevcut.");
                 urunBulunduMu = true;
                 break;
             }
@@ -105,31 +105,48 @@ public class ProductService {
 
         if (!Utils.Utils1.urunKontrol(mevcutUrunler)) return; // Depoda ürün yoksa ana menüye dön
 
-        int id = Utils.gecerliUrunIdAl(mevcutUrunler, "--İşlem yapmak istediğiniz ürünün id numarasını giriniz: ");
+        Product product = null;
+        int id;
+        boolean gecerliUrunID = false;
 
-        if (mevcutUrunler.containsKey(id)) {
-            Product product = mevcutUrunler.get(id);
-
-            if (product.getRaf() != null && !product.getRaf().isEmpty()) {
-                System.out.println("Ürünün zaten bir raf numarası var: " + product.getRaf());
-                return;
+        // Ürün ID'si geçerli olana kadar sor
+        do {
+            id = utils.intGirisAl("İşlem yapmak istediğiniz ürünün ID numarasını giriniz: ");
+            if (mevcutUrunler.containsKey(id)) {
+                product = mevcutUrunler.get(id);
+                gecerliUrunID = true; // Geçerli ID bulundu, döngüden çık
+            } else {
+                System.out.println("--Geçersiz ürün ID'si. Lütfen geçerli bir ID giriniz.--");
             }
+        } while (!gecerliUrunID);
 
+        // Ürünün zaten bir raf numarası varsa, işlemi sonlandır
+        if (product.getRaf() != null && !product.getRaf().isEmpty()) {
+            System.out.println("Ürünün zaten bir raf numarası var: " + product.getRaf());
+            return;
+        }
+
+        String yeniRafStr;
+        int yeniRaf;
+        boolean gecerliRafNumarasi = false;
+
+        // Raf numarası geçerli olana kadar sor
+        do {
             System.out.println("Lütfen raf numarasını giriniz (100 ile 999 arasında): ");
-
-            // Eğer burada sayı alacaksanız, buffer temizliğini sağlayın
-            String yeniRafStr = input.nextLine().trim(); // nextInt'ten sonra kullanıyorsanız buffer temizliği önemli
+            yeniRafStr = input.nextLine().trim();
 
             try {
-                int yeniRaf = Integer.parseInt(yeniRafStr);
+                yeniRaf = Integer.parseInt(yeniRafStr);
 
                 if (yeniRaf >= 100 && yeniRaf <= 999) {
+                    String finalYeniRafStr = yeniRafStr;
                     boolean rafDolu = mevcutUrunler.values().stream()
-                            .anyMatch(p -> yeniRafStr.equals(p.getRaf()));
+                            .anyMatch(p -> finalYeniRafStr.equals(p.getRaf()));
 
                     if (!rafDolu) {
                         product.setRaf(yeniRafStr);
                         System.out.println("Ürün başarıyla " + yeniRaf + " nolu rafa yerleştirildi.");
+                        gecerliRafNumarasi = true; // Geçerli raf numarası girildi, döngüden çık
                     } else {
                         System.out.println("--Bu raf numarası başka bir ürün tarafından kullanılmaktadır.--");
                     }
@@ -139,9 +156,7 @@ public class ProductService {
             } catch (NumberFormatException e) {
                 System.out.println("--Geçersiz raf numarası! Lütfen sayısal bir değer giriniz.--");
             }
-        } else {
-            System.out.println("--Geçersiz ürün ID'si. Lütfen geçerli bir ID giriniz.--");
-        }
+        } while (!gecerliRafNumarasi);
 
         urunListele(); // Güncel listeyi göster
     }
@@ -218,9 +233,19 @@ public class ProductService {
 
             System.out.println("Mevcut Raf: " + product.getRaf());
             Integer yeniRaf = Utils.intAralikKontrolu("Yeni Raf (güncellenmeyecekse boş bırakın, 100 ile 999 arasında olmalı): ", 100, 999);
+
             if (yeniRaf != null) {
+                // Aynı raf numarasına sahip başka bir ürün varsa, onun rafını null yap
+                mevcutUrunler.values().forEach(p -> {
+                    if (yeniRaf.toString().equals(p.getRaf()) && p != product) {
+                        p.setRaf(null); // Önceki ürünün raf numarasını iptal ediyoruz
+                    }
+                });
+
+                // Yeni raf numarasını güncellenecek ürüne atayın
                 product.setRaf(yeniRaf.toString());
             }
+
 
 
             System.out.println("--Ürün bilgileri başarıyla güncellendi.--");
