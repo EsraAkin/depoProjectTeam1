@@ -71,11 +71,6 @@ public class Utils {
     }
 
     // ------------------Boş girdi kontrolü---------------------------------
-    public static boolean isEmpty(String input) {
-        return input == null || input.trim().isEmpty();
-
-    }
-
     public static String bosGec(String mesaj) {
         Scanner input = new Scanner(System.in);
         String kullaniciGirisi = "";
@@ -116,7 +111,7 @@ public class Utils {
         }
         return deger;
     }
-//-------------------gecerliPozitifMiktarAl--------------------------------
+    //-------------------gecerliPozitifMiktarAl--------------------------------
     public static int gecerliPozitifMiktarAl(String mesaj) {
         Scanner input = new Scanner(System.in);
         int miktar;
