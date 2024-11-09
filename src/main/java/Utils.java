@@ -66,6 +66,8 @@ public class Utils {
                 }
             } catch (NumberFormatException e) {
                 System.out.println("--Hatalı giriş! Lütfen bir tam sayı giriniz.--");
+
+
             }
         }
     }
@@ -127,6 +129,8 @@ public class Utils {
                 }
             } catch (NumberFormatException e) {
                 System.out.println("--Geçersiz giriş! Lütfen geçerli bir tam sayı giriniz.--");
+
+
             }
         }
     }
