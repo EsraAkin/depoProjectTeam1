@@ -182,6 +182,12 @@ public class ProductService {
         } else {
             System.out.println("Hata: Çıkış miktarı mevcut miktardan fazla olamaz!");
         }
+        //2.yol olarak da tercih edilebilir..
+        //public class gecerliPozitifMiktarAl extends RuntimeException{
+        //    public gecerliPozitifMiktarAl(String message){
+        //        super(message);
+        //    }
+        //}
 
         urunListele();
     }
